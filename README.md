@@ -40,7 +40,7 @@ The main change is to add the following section to the appsettings.json file:
 
 The API also exposes a Swagger endpoint, which you can use to explore the API and test queries - this can be accessed from the URL /umbraco/swagger/. Don't forget to select the *Umbraco Content Delivery API* from the dropdown. 
 
-## Get Products
+## Get Products - Content Delivery API
 
 To load products from the API, use the following query:
 
@@ -51,6 +51,13 @@ The "production" (demo) URL iis
     https://maui.carlcod.es/umbraco/delivery/api/v1/content?filter=contentType%3Aproduct
 
 Note - the filter query needs to be encoded, so `contentType:product` becomes `contentType%3Aproduct`
+
+## Get Products - Rest
+
+To load products from the API, use the following query:
+
+    https://localhost:44356/umbraco/api/product/getallproducts
+
 
 # References
 
