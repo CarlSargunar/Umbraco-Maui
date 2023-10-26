@@ -1,6 +1,8 @@
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Logging;
+using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Routing;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
@@ -14,17 +16,36 @@ namespace UmbracoCMS.Controllers
     public class ProductController : UmbracoApiController
     {
         private readonly IUmbracoContextAccessor _umbracoContextAccessor;
+        private readonly ILogger<ProductController> _logger;
 
-        public ProductController(IUmbracoContextAccessor umbracoContextAccessor)
+        public ProductController(IUmbracoContextAccessor umbracoContextAccessor, ILogger<ProductController> logger)
         {
             _umbracoContextAccessor = umbracoContextAccessor;
+            _logger = logger;
         }
 
         [HttpGet]
         public IEnumerable<Product> GetAllProducts()
         {
             // Accessable from /umbraco/api/product/getallproducts
+
+            if (_umbracoContextAccessor.TryGetUmbracoContext(out IUmbracoContext? context) == false)
+            {
+                _logger.LogCritical("Unable to get context");
+            }
+
+            if (context.Content == null)
+            {
+                _logger.LogCritical("Content Cache is null");
+            }
+            
+            var productType = context.Content.GetContentType("product");
+            var rootNode = context.Content.GetAtRoot();
+            Debug.WriteLine($"RootNode : {productType.Alias}");
             var tmp = new List<Product>();
+            
+            
+            
             tmp.Add(new Product
             {
                 Name = "Table",
