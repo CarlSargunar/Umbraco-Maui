@@ -32,7 +32,7 @@ namespace UmbracoCMS.Controllers
         [HttpGet]
         public IEnumerable<Product> GetAllProducts()
         {
-            // Accessable from /umbraco/api/product/getallproducts
+            // Accessible from /umbraco/api/product/getallproducts
 
             if (_umbracoContextAccessor.TryGetUmbracoContext(out IUmbracoContext? context) == false)
             {
@@ -43,12 +43,12 @@ namespace UmbracoCMS.Controllers
             {
                 _logger.LogCritical("Content Cache is null");
             }
-            
+
             var rootNode = context.Content.GetAtRoot().FirstOrDefault();
             var productNodes = rootNode.DescendantsOfType(productDoctype);
 
 
-            var tmp = new List<Product>();
+            var prods = new List<Product>();
 
             foreach (var p in productNodes)
             {
@@ -56,15 +56,24 @@ namespace UmbracoCMS.Controllers
                 var product = new Product
                 {
                     Name = p.Name,
-                    Description = p.Value(_publishedValueFallback, "description") as string ?? string.Empty,
-                    Price = (decimal)(p.Value(_publishedValueFallback, "price") ?? 0),
-                    SKU = p.Value(_publishedValueFallback, "sku") as string ?? string.Empty,
+                    Description = p.Value<string>(_publishedValueFallback, "description") ?? string.Empty,
+                    Price = p.Value<decimal>(_publishedValueFallback, "price"),
+                    SKU = p.Value<string>(_publishedValueFallback, "sku") ?? string.Empty,
                 };
-                tmp.Add(product);
+
+                var image = p.Value<IPublishedContent>(_publishedValueFallback, "photos");
+                if (image != null)
+                {
+                    product.Image = image.Url();
+                }
+
+                var categories = p.Value<IEnumerable<string>>(_publishedValueFallback, "category");
+                if (categories != null) product.Category = categories.ToArray();
+                prods.Add(product);
             }
 
 
-            return tmp;
+            return prods;
         }
 
 
