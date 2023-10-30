@@ -45,7 +45,10 @@
                 </Border>
                 <Label Style="{StaticResource LargeLabel}" Text="{Binding Product.Name}" />
                 <Label Style="{StaticResource SmallLabel}" Text="{Binding Product.Description}" />
-                <Button Text="Buy" 
+                <Button 
+                    x:Name="BuyButton"
+                    Text="Buy"
+                        Clicked="OnBuyButtonClicked"
                         HorizontalOptions="Center"
                         VerticalOptions="End"
                         WidthRequest="200" 

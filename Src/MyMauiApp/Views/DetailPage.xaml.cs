@@ -1,3 +1,4 @@
+using CommunityToolkit.Maui.Views;
 using MyMauiApp.ViewModels;
 
 namespace MyMauiApp.Views;
@@ -10,4 +11,9 @@ public partial class DetailPage : ContentPage
         BindingContext = productDetailViewModel;
 		InitializeComponent();
 	}
+
+    private void OnBuyButtonClicked(object sender, EventArgs e)
+    {
+        this.ShowPopup(new BuyPopup());
+    }
 }

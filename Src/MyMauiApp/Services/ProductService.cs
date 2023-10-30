@@ -19,26 +19,31 @@ namespace MyMauiApp.Services
         }
 
         List<Product> productList;
-        public async Task<List<Product>> GetProducts()
-        {
-            if (productList?.Count > 0)
-                return productList;
 
-            // We don't have a list of products, so load it from the Product API
-            productList = await FetchProductsFromApi();
+        public async Task<List<Product>> GetProductsFromContentDelivery()
+        {
+            // Load Products from from the Content Delivery API
+            productList = await FetchProductsFromContentDeliveryApi();
+            return productList;
+        }
+        public async Task<List<Product>> GetProductsFromRest()
+        {
+            // Load Products from from the Content Custom Rest API
+            productList = await FetchProductsFromRestApi();
             return productList;
         }
 
-        private async Task<List<Product>> FetchProductsFromApi()
+        /// <summary>
+        /// Call the Content Delivery API to load products
+        /// </summary>
+        /// <returns></returns>
+        private async Task<List<Product>> FetchProductsFromContentDeliveryApi()
         {
-            // Call the Content Delivery API to load products
             var products = new List<Product>();
-            ContentDeliveryResponse contentDeliveryResponse;
-
-            var apiResponse = await httpClient.GetAsync(Helpers.APIURL);
+            var apiResponse = await httpClient.GetAsync(Helpers.ContentDeliveryAPIURL);
             if (apiResponse.IsSuccessStatusCode)
             {
-                contentDeliveryResponse = await apiResponse.Content.ReadFromJsonAsync<ContentDeliveryResponse>();
+                var contentDeliveryResponse = await apiResponse.Content.ReadFromJsonAsync<ContentDeliveryResponse>();
 
                 foreach (var item in contentDeliveryResponse.items)
                 {
@@ -52,6 +57,31 @@ namespace MyMauiApp.Services
                         Image = Helpers.ImagePath(item.properties.photos[0].url)
                     };
                     products.Add(product);
+                }
+            }
+
+            return products;
+        }
+
+
+
+        /// <summary>
+        /// Call the Custom Rest API to load products
+        /// </summary>
+        /// <returns></returns>
+        private async Task<List<Product>> FetchProductsFromRestApi()
+        {
+            var products = new List<Product>();
+            ContentDeliveryResponse contentDeliveryResponse;
+
+            var apiResponse = await httpClient.GetAsync(Helpers.APIURL);
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                var restProducts = await apiResponse.Content.ReadFromJsonAsync<List<Product>>();
+                foreach (var item in restProducts)
+                {
+                    item.Image = Helpers.ImagePath(item.Image);
+                    products.Add(item);
                 }
             }
 
