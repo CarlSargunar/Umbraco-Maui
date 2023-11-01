@@ -53,8 +53,9 @@ namespace UmbracoCMS.Controllers
             foreach (var p in productNodes)
             {
                 if (p == null) continue;
-                var product = new Product
+                var item = new Product
                 {
+                    Id = p.Id,
                     Name = p.Name,
                     Description = p.Value<string>(_publishedValueFallback, "description") ?? string.Empty,
                     Price = p.Value<decimal>(_publishedValueFallback, "price"),
@@ -64,12 +65,12 @@ namespace UmbracoCMS.Controllers
                 var image = p.Value<IPublishedContent>(_publishedValueFallback, "photos");
                 if (image != null)
                 {
-                    product.Image = image.Url();
+                    item.Image = image.Url();
                 }
 
-                var categories = p.Value<IEnumerable<string>>(_publishedValueFallback, "category");
-                if (categories != null) product.Category = categories.ToArray();
-                prods.Add(product);
+                var items = p.Value<IEnumerable<string>>(_publishedValueFallback, "category");
+                if (items != null) item.Category = items.ToArray();
+                prods.Add(item);
             }
 
 

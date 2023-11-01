@@ -58,6 +58,9 @@ To load products from the API, use the following query:
 
     https://localhost:44356/umbraco/api/product/getallproducts
 
+The "production" (demo) URL iis 
+
+    https://maui.carlcod.es/umbraco/api/product/getallproducts
 
 # References
 

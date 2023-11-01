@@ -1,8 +1,7 @@
 namespace UmbracoCMS.Models
 {
-    public class Product
+    public class Product : Content
     {
-        public string Name { get; set; }
         public decimal Price { get; set; }
         public string SKU { get; set; }
         public string Image { get; set; }
