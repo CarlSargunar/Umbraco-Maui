@@ -5,12 +5,13 @@ namespace MyMauiApp.Models
 {
     public class Product
     {
-        private static readonly CultureInfo _cultureInfo = new("en-GB"); // Hard coded for demo
-        public string FormattedPrice => Price.ToString("C2", _cultureInfo);
+	    // Hard coded for demo
+		private static readonly CultureInfo CultureInfo = new("en-GB"); 
+        public string FormattedPrice => Price.ToString("C2", CultureInfo);
 
         public string Name { get; set; }
         public decimal Price { get; set; }
-        public string SKU { get; set; }
+        public string Sku { get; set; }
         public string Image { get; set; }
         public string Description { get; set; }
         public string[] Category { get; set; }
