@@ -8,7 +8,8 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal">
+                        <StackLayout Orientation="Horizontal"
+                                     Padding="20">
                             <Image Source="{Binding Image}" WidthRequest="200" HeightRequest="200" />
                             <StackLayout>
                                 <Label Text="{Binding Name}" />
