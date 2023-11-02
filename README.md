@@ -53,42 +53,42 @@ Note - the filter query needs to be encoded, e.g. `contentType:product` becomes 
 The content response data structure is generic, shown below
 
     {
-    "name": "string",
-    "createDate": "2023-06-23T11:31:07.281Z",
-    "updateDate": "2023-06-23T11:31:07.281Z",
-    "route": {
-        "path": "string",
-        "startItem": {
-        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-        "path": "string"
-        }
-    },
-    "id": "11fb598b-5c51-4d1a-8f2e-0c7594361d15",
-    "contentType": "string",
-    "properties": {
-        "property1Alias": "string",
-        "property2Alias": 0,
-        "property3Alias": true,
-        "property4Alias": [],
-        "property5Alias": {},
-        "property6Alias": null
-    },
-    "cultures": {
-        "cultureIsoCode1": {
-        "path": "string",
-        "startItem": {
+        "name": "string",
+        "createDate": "2023-06-23T11:31:07.281Z",
+        "updateDate": "2023-06-23T11:31:07.281Z",
+        "route": {
+            "path": "string",
+            "startItem": {
             "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
             "path": "string"
-        }
+            }
         },
-        "cultureIsoCode2": {
-        "path": "string",
-        "startItem": {
-            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-            "path": "string"
+        "id": "11fb598b-5c51-4d1a-8f2e-0c7594361d15",
+        "contentType": "string",
+        "properties": {
+            "property1Alias": "string",
+            "property2Alias": 0,
+            "property3Alias": true,
+            "property4Alias": [],
+            "property5Alias": {},
+            "property6Alias": null
+        },
+        "cultures": {
+            "cultureIsoCode1": {
+            "path": "string",
+            "startItem": {
+                "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                "path": "string"
+            }
+            },
+            "cultureIsoCode2": {
+            "path": "string",
+            "startItem": {
+                "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                "path": "string"
+            }
+            }
         }
-        }
-    }
     }
 
 ## Get Products - Rest

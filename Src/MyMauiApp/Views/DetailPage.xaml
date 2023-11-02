@@ -39,7 +39,7 @@
             <VerticalStackLayout Grid.Row="2" Padding="10" Spacing="10">
                 <Border Padding="10">
                     <Grid>
-                        <Label HorizontalOptions="Start" Style="{StaticResource MediumLabel}" Text="{Binding Product.SKU, StringFormat='SKU: {0}'}" />
+                        <Label HorizontalOptions="Start" Style="{StaticResource MediumLabel}" Text="{Binding Product.Sku, StringFormat='SKU: {0}'}" />
                         <Label HorizontalOptions="End" Style="{StaticResource MediumLabel}" Text="{Binding Product.FormattedPrice, StringFormat='Price: {0}'}" />
                     </Grid>
                 </Border>

@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace MyMauiApp
 {
-    internal static class Helpers
+    internal static class DemoHelpers
     {
-        internal static string ContentDeliveryAPIURL = "https://maui.carlcod.es/umbraco/delivery/api/v1/content?filter=contentType%3Aproduct";
-        internal static string APIURL = "https://maui.carlcod.es/umbraco/api/product/getallproducts";
-        internal static string MediaUrlBase = "https://maui.carlcod.es/";
+        internal static string BaseUrl = "https://maui.carlcod.es/";
+        internal static string ContentDeliveryApiUrl = $"{BaseUrl}umbraco/delivery/api/v1/content?filter=contentType%3Aproduct";
+        internal static string ApiUrl = $"{BaseUrl}umbraco/api/product/getallproducts";
 
-        internal static string ImagePath(string path)
+		internal static string ImagePath(string path)
         {
             if (string.IsNullOrEmpty(path))
                 return string.Empty;
 
-            return $"{MediaUrlBase}{path}?width=200";
+            return $"{BaseUrl}{path}?width=200";
         }
 
 

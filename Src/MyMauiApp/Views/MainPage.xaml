@@ -33,7 +33,7 @@
                                 Grid.Column="1"
                                 Padding="10">
                                     <Label Style="{StaticResource LargeLabel}" Text="{Binding Name}" />
-                                    <Label Style="{StaticResource SmallLabel}" Text="{Binding SKU}" />
+                                    <Label Style="{StaticResource SmallLabel}" Text="{Binding Sku}" />
                                     <Label Style="{StaticResource LargeLabel}" Text="{Binding FormattedPrice}" />
                                 </VerticalStackLayout>
                             </Grid>

@@ -40,7 +40,7 @@ namespace MyMauiApp.Services
         private async Task<List<Product>> FetchProductsFromContentDeliveryApi()
         {
             var products = new List<Product>();
-            var apiResponse = await httpClient.GetAsync(Helpers.ContentDeliveryAPIURL);
+            var apiResponse = await httpClient.GetAsync(DemoHelpers.ContentDeliveryApiUrl);
             if (apiResponse.IsSuccessStatusCode)
             {
                 var contentDeliveryResponse = await apiResponse.Content.ReadFromJsonAsync<ContentDeliveryResponse>();
@@ -51,10 +51,10 @@ namespace MyMauiApp.Services
                     {
                         Name = item.properties.productName,
                         Price = item.properties.price,
-                        SKU = item.properties.sku,
+                        Sku = item.properties.sku,
                         Description = item.properties.description,
                         Category = item.properties.category,
-                        Image = Helpers.ImagePath(item.properties.photos[0].url)
+                        Image = DemoHelpers.ImagePath(item.properties.photos[0].url)
                     };
                     products.Add(product);
                 }
@@ -74,13 +74,13 @@ namespace MyMauiApp.Services
             var products = new List<Product>();
             ContentDeliveryResponse contentDeliveryResponse;
 
-            var apiResponse = await httpClient.GetAsync(Helpers.APIURL);
+            var apiResponse = await httpClient.GetAsync(DemoHelpers.ApiUrl);
             if (apiResponse.IsSuccessStatusCode)
             {
                 var restProducts = await apiResponse.Content.ReadFromJsonAsync<List<Product>>();
                 foreach (var item in restProducts)
                 {
-                    item.Image = Helpers.ImagePath(item.Image);
+                    item.Image = DemoHelpers.ImagePath(item.Image);
                     products.Add(item);
                 }
             }

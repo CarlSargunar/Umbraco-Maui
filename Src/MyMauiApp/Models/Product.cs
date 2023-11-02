@@ -7,6 +7,7 @@ namespace MyMauiApp.Models
     {
 	    // Hard coded for demo
 		private static readonly CultureInfo CultureInfo = new("en-GB"); 
+        // I suppose this formatting counts as business logic?
         public string FormattedPrice => Price.ToString("C2", CultureInfo);
 
         public string Name { get; set; }
