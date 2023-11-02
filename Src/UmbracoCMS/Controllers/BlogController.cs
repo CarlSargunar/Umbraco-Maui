@@ -38,12 +38,12 @@ namespace UmbracoCMS.Controllers
             }
 
             var rootNode = context.Content.GetAtRoot().FirstOrDefault();
-            var peopleNodes = rootNode.DescendantsOfType(blogDocType);
+            var nodes = rootNode.DescendantsOfType(blogDocType);
 
 
             var prods = new List<Blog>();
 
-            foreach (var p in peopleNodes)
+            foreach (var p in nodes)
             {
                 if (p == null) continue;
                 var item = new Blog

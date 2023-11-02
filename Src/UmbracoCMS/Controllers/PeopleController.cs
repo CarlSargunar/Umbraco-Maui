@@ -6,14 +6,14 @@ using UmbracoCMS.Models;
 
 namespace UmbracoCMS.Controllers
 {
-    public class PeopleController : UmbracoApiController
+    public class PersonController : UmbracoApiController
     {
         private readonly IUmbracoContextAccessor _umbracoContextAccessor;
-        private readonly ILogger<PeopleController> _logger;
+        private readonly ILogger<PersonController> _logger;
         private readonly IPublishedValueFallback _publishedValueFallback;
         private string peopleDoctype = "person";
 
-        public PeopleController(IUmbracoContextAccessor umbracoContextAccessor, ILogger<PeopleController> logger, IPublishedValueFallback publishedValueFallback)
+        public PersonController(IUmbracoContextAccessor umbracoContextAccessor, ILogger<PersonController> logger, IPublishedValueFallback publishedValueFallback)
         {
             _umbracoContextAccessor = umbracoContextAccessor;
             _logger = logger;
@@ -23,7 +23,7 @@ namespace UmbracoCMS.Controllers
         [HttpGet]
         public IEnumerable<Person> GetAllPeople()
         {
-            // Accessible from /umbraco/api/people/getallpeople
+            // Accessible from /umbraco/api/person/getallpeople
 
             if (_umbracoContextAccessor.TryGetUmbracoContext(out IUmbracoContext? context) == false)
             {
@@ -36,12 +36,12 @@ namespace UmbracoCMS.Controllers
             }
 
             var rootNode = context.Content.GetAtRoot().FirstOrDefault();
-            var peopleNodes = rootNode.DescendantsOfType(peopleDoctype);
+            var nodes = rootNode.DescendantsOfType(peopleDoctype);
 
 
             var prods = new List<Person>();
 
-            foreach (var p in peopleNodes)
+            foreach (var p in nodes)
             {
                 if (p == null) continue;
                 var item = new Person

@@ -45,12 +45,12 @@ namespace UmbracoCMS.Controllers
             }
 
             var rootNode = context.Content.GetAtRoot().FirstOrDefault();
-            var productNodes = rootNode.DescendantsOfType(productDoctype);
+            var nodes = rootNode.DescendantsOfType(productDoctype);
 
 
             var prods = new List<Product>();
 
-            foreach (var p in productNodes)
+            foreach (var p in nodes)
             {
                 if (p == null) continue;
                 var item = new Product
