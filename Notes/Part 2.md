@@ -146,8 +146,60 @@ You can see the generated code under Dependancies -> .net7-XX -> Analysers -> Co
 
 6 - Replace the contents of MainPage.xaml with the following
 
+    <StackLayout>
+        <CollectionView x:Name="ProductList"
+                ItemsSource="{Binding Products}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Product">
+                    <Grid Padding="10">
+                        <Frame HeightRequest="125">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ProductsViewModel}}, Path=GoToDetailsCommand}"
+                                    CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+                            <Grid Padding="0" ColumnDefinitions="125,*">
+                                <Image Aspect="AspectFill" Source="{Binding Image}"
+                                    WidthRequest="125"
+                                    HeightRequest="125"/>
+                                <VerticalStackLayout
+                                    VerticalOptions="Center"
+                                    Grid.Column="1"
+                                    Padding="10">
+                                    <Label Text="{Binding Name}" />
+                                    <Label Text="{Binding Sku}" />
+                                    <Label Text="{Binding FormattedPrice}" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Text="Get Products" 
+                Command="{Binding GetProductFromContentDeliveryCommand}"
+                IsEnabled="{Binding IsNotBusy}"
+                Margin="8"/>
 
-7 - Inject the ProductsViewModel into the constructor of App.xaml.cs
+        <Label IsVisible="{Binding IsBusy}" Text="Loading Data ..." ></Label>
+    </StackLayout>
+
+
+7 - Add the ProductDetailsViewModel.cs
+
+    [QueryProperty(nameof(Product), "Product")]
+    public partial class ProductDetailViewModel : BaseViewModel
+    {
+        public ProductDetailViewModel()
+        {
+
+        }
+
+        [ObservableProperty]
+        Product product;
+    }
+
+8 - Inject the ProductsViewModel into the constructor of App.xaml.cs
 
     // Add Hardware Services
     builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);

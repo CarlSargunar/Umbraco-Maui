@@ -1,16 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
-using MyMauiApp.Helpers;
-using MyMauiApp.Models;
-using MyMauiApp.Services.Models;
+# Runthrough - Part 3
 
-namespace MyMauiApp.Services
-{
+1 - Open Postman and get the response of calling the Product Content Delivery API
+
+    https://maui.carlcod.es/umbraco/delivery/api/v1/content?filter=contentType%3Aproduct
+
+    Paste as Json in Services/Models/ContentDeliveryResponse.cs
+
+    - Rename RootObject to ContentDeliveryResponse
+    - Rename Item1 to ContentItem
+    - Rename Properties1 to ContentProperties
+    - Rename Properties2 to PhotoProperties
+
+2 - Add the class Helpers/DemoHelpers.cs
+
+    internal static class DemoHelpers
+    {
+        internal static string BaseUrl = "https://maui.carlcod.es/";
+        internal static string ContentDeliveryApiUrl = $"{BaseUrl}umbraco/delivery/api/v1/content?filter=contentType%3Aproduct";
+        internal static string ApiUrl = $"{BaseUrl}umbraco/api/product/getallproducts";
+
+		internal static string ImagePath(string path)
+        {
+            if (string.IsNullOrEmpty(path))
+                return string.Empty;
+
+            return $"{BaseUrl}{path}?width=200";
+        }
+
+
+    }
+
+3 - Update ProductService with the following code
+
 	public class ProductService
 	{
 
@@ -60,4 +81,3 @@ namespace MyMauiApp.Services
 		}
 
 	}
-}
