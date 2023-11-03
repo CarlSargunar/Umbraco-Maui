@@ -51,11 +51,11 @@
             Grid.Column="0"
             Margin="8"/>
 
-        <Button Text="Get Products From Rest" 
+        <!--<Button Text="Get Products From Rest" 
             Command="{Binding GetProductFromRestCommand}"
             Grid.Row="1"
             Grid.Column="1"
-            Margin="8"/>
+            Margin="8"/>-->
 
         <ActivityIndicator IsVisible="{Binding IsBusy}"
                        IsRunning="{Binding IsBusy}"

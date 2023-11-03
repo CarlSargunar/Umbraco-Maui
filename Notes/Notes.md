@@ -19,3 +19,41 @@ Calling
 - https://localhost:44315/umbraco/delivery/api/v1/content/item/262beb70-53a6-49b8-9e98-cfde2e85a78e
 
 Will return the json from [ProductResponse.json](./ProductResponse.json)
+
+## Product Service
+
+var products = new List<Product>();
+var apiResponse = await httpClient.GetAsync(DemoHelpers.ContentDeliveryApiUrl);
+if (apiResponse.IsSuccessStatusCode)
+{
+	var contentDeliveryResponse = await apiResponse.Content.ReadFromJsonAsync<ContentDeliveryResponse>();
+
+	foreach (var item in contentDeliveryResponse.items)
+	{
+		var product = new Product
+		{
+			Name = item.properties.productName,
+			Price = item.properties.price,
+			Sku = item.properties.sku,
+			Description = item.properties.description,
+			Category = item.properties.category,
+			Image = DemoHelpers.ImagePath(item.properties.photos[0].url)
+		};
+		products.Add(product);
+	}
+}
+
+return products;
+
+## Json Definition
+
+Open Postman and get the response of calling the Product Content Delivery API
+
+    https://maui.carlcod.es/umbraco/delivery/api/v1/content?filter=contentType%3Aproduct
+
+    Paste as Json in Services/Models/ContentDeliveryResponse.cs
+
+    - Rename RootObject to ContentDeliveryResponse
+    - Rename Item1 to ContentItem
+    - Rename Properties1 to ContentProperties
+    - Rename Properties2 to PhotoProperties

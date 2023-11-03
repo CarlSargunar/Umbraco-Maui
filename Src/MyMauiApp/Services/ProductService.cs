@@ -19,16 +19,59 @@ namespace MyMauiApp.Services
 		{
 			this.httpClient = new HttpClient();
 		}
-
-		List<Product> productList;
+		
 
 		public async Task<List<Product>> GetProducts()
 		{
 			// Load Products from from the Content Delivery API
-			productList = await FetchProductsFromContentDeliveryApi();
+			// var productList = await FetchProductsFromContentDeliveryApi();
+			var productList = await FetchLocalProducts();
 			return productList;
 		}
-		
+
+		/// <summary>
+		/// Load hard coded products
+		/// </summary>
+		/// <returns></returns>
+		private async Task<List<Product>> FetchLocalProducts()
+		{
+			var productList = new List<Product>();
+			var prod1 = new Product
+			{
+				Name = "Product 1",
+				Price = 10.99m,
+				Sku = "SKU1",
+				Image = "https://picsum.photos/id/101/200",
+				Description = "Product 1 Description",
+				Category = new string[] { "Category 1", "Category 2" }
+			};
+			productList.Add(prod1);
+
+			var prod2 = new Product
+			{
+				Name = "Product 2",
+				Price = 20.99m,
+				Sku = "SKU2",
+				Image = "https://picsum.photos/id/102/200",
+				Description = "Product 2 Description",
+				Category = new string[] { "Category 1", "Category 2" }
+			};
+			productList.Add(prod2);
+
+			var prod3 = new Product
+			{
+				Name = "Product 3",
+				Price = 30.99m,
+				Sku = "SKU3",
+				Image = "https://picsum.photos/id/103/200",
+				Description = "Product 3 Description",
+				Category = new string[] { "Category 1", "Category 2" }
+			};
+			productList.Add(prod3);
+
+			return productList;
+		}
+
 
 		/// <summary>
 		/// Call the Content Delivery API to load products
@@ -36,28 +79,7 @@ namespace MyMauiApp.Services
 		/// <returns></returns>
 		private async Task<List<Product>> FetchProductsFromContentDeliveryApi()
 		{
-			var products = new List<Product>();
-			var apiResponse = await httpClient.GetAsync(DemoHelpers.ContentDeliveryApiUrl);
-			if (apiResponse.IsSuccessStatusCode)
-			{
-				var contentDeliveryResponse = await apiResponse.Content.ReadFromJsonAsync<ContentDeliveryResponse>();
-
-				foreach (var item in contentDeliveryResponse.items)
-				{
-					var product = new Product
-					{
-						Name = item.properties.productName,
-						Price = item.properties.price,
-						Sku = item.properties.sku,
-						Description = item.properties.description,
-						Category = item.properties.category,
-						Image = DemoHelpers.ImagePath(item.properties.photos[0].url)
-					};
-					products.Add(product);
-				}
-			}
-
-			return products;
+			throw new NotImplementedException();
 		}
 
 
@@ -65,7 +87,7 @@ namespace MyMauiApp.Services
 		public async Task<List<Product>> GetProductsFromRest()
 		{
 			// Load Products from from the Content Custom Rest API
-			productList = await FetchProductsFromRestApi();
+			var productList = await FetchProductsFromRestApi();
 			return productList;
 		}
 
