@@ -1,24 +1,46 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:MyMauiApp.ViewModels"
              x:Class="MyMauiApp.Views.MainPage"
+             xmlns:model="clr-namespace:MyMauiApp.Models"
+             x:DataType="viewmodel:ProductsViewModel"
              Title="MainPage">
     <StackLayout>
-        <ListView x:Name="ProductList" ItemTapped="ProductList_ItemTapped">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal"
-                                     Padding="20">
-                            <Image Source="{Binding Image}" WidthRequest="200" HeightRequest="200" />
-                            <StackLayout>
-                                <Label Text="{Binding Name}" />
-                                <Label Text="{Binding FormattedPrice}" />
-                            </StackLayout>
-                        </StackLayout>
-                    </ViewCell>
+        <CollectionView x:Name="ProductList"
+                  ItemsSource="{Binding Products}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Product">
+                    <Grid Padding="10">
+                        <Frame HeightRequest="125">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ProductsViewModel}}, Path=GoToDetailsCommand}"
+                                    CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+                            <Grid Padding="0" ColumnDefinitions="125,*">
+                                <Image Aspect="AspectFill" Source="{Binding Image}"
+                                       WidthRequest="125"
+                                       HeightRequest="125"/>
+                                <VerticalStackLayout
+                                    VerticalOptions="Center"
+                                    Grid.Column="1"
+                                    Padding="10">
+                                    <Label Text="{Binding Name}" />
+                                    <Label Text="{Binding Sku}" />
+                                    <Label Text="{Binding FormattedPrice}" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </Grid>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Text="Get Products" 
+                Command="{Binding GetProductFromContentDeliveryCommand}"
+                IsEnabled="{Binding IsNotBusy}"
+                Margin="8"/>
+
+        <Label IsVisible="{Binding IsBusy}" Text="Loading Data ..." ></Label>
     </StackLayout>
 </ContentPage>

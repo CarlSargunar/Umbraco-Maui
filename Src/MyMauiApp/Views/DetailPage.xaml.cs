@@ -1,10 +1,12 @@
+using MyMauiApp.ViewModels;
+
 namespace MyMauiApp.Views;
 
 public partial class DetailPage : ContentPage
 {
-	public DetailPage(Models.Product product)
+	public DetailPage(ProductDetailViewModel productDetailViewModel)
 	{
 		InitializeComponent();
-		BindingContext = product;
+		BindingContext = productDetailViewModel;
 	}
 }

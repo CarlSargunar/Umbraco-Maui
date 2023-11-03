@@ -1,12 +1,16 @@
 using MyMauiApp.Models;
 using MyMauiApp.Services;
+using System.Collections.ObjectModel;
+using MyMauiApp.ViewModels;
 
 namespace MyMauiApp.Views;
 
 public partial class MainPage : ContentPage
 {
-	public MainPage()
+	public MainPage(ProductsViewModel productsViewModel)
 	{
+		// Set the Binding Context on the constructor to hook it all up
+		BindingContext = productsViewModel;
 		InitializeComponent();
 	}
 
@@ -23,11 +27,5 @@ public partial class MainPage : ContentPage
 		var products = await productService.GetProducts();
 
 		ProductList.ItemsSource = products;
-	}
-
-	private void ProductList_ItemTapped(object sender, ItemTappedEventArgs e)
-	{
-		var product = e.Item as Product;
-		Navigation.PushAsync(new DetailPage(product));
 	}
 }

@@ -20,6 +20,13 @@ namespace MyMauiApp
 		builder.Logging.AddDebug();
 #endif
 
+			// Add Hardware Services
+			builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
+
+			// Add ViewModels
+			builder.Services.AddSingleton<ViewModels.ProductDetailViewModel>();
+			builder.Services.AddSingleton<ViewModels.ProductsViewModel>();
+
 			// Add Pages
 			builder.Services.AddSingleton<MainPage>();
 			builder.Services.AddSingleton<DetailPage>();
