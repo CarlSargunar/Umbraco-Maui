@@ -1,6 +1,6 @@
 # Runthrough - Part 2
 
-1 - Add a reference to CommunityToolkit.Mvvm
+1 - Add a file Viewmodels/BaseViewModel.cs
 
     public class BaseViewModel : INotifyPropertyChanged
 
@@ -37,7 +37,9 @@
         }
     }
 
-3 - Replace the content for BaseViewModel. This will use the Source Generator to generate the code for the properties. Note it's a partial
+3 - Add a reference to CommunityToolkit.Mvvm
+
+4 - Replace the content for BaseViewModel. This will use the Source Generator to generate the code for the properties. Note it's a partial
 
     public partial class BaseViewModel : ObservableObject
     {
@@ -53,7 +55,7 @@
 
 You can see the generated code under Dependancies -> .net7-XX -> Analysers -> CommunityToolkit.Mvvm.SourceGenerators -> CommunityToolkit.Mvvm.SourceGenerators.ObservabalePropertyGenerators -> MyMauiApp.Viewmodels.BaseViewModel.g.cs
 
-4 - Add a new class called ViewModels\ProductsViewModel.cs
+5 - Add a new class called ViewModels\ProductsViewModel.cs
 
 	public partial class ProductsViewModel : BaseViewModel
 	{
@@ -121,7 +123,7 @@ You can see the generated code under Dependancies -> .net7-XX -> Analysers -> Co
 
 	}
 
-5 - Replace the contents of Mainpage.cs with the following
+6 - Replace the contents of Mainpage.cs with the following
 
 	public MainPage(ProductsViewModel productsViewModel)
 	{
@@ -144,7 +146,7 @@ You can see the generated code under Dependancies -> .net7-XX -> Analysers -> Co
 		ProductList.ItemsSource = products;
 	}
 
-6 - Replace the contents of MainPage.xaml with the following
+7 - Replace the contents of MainPage.xaml with the following
 
     <StackLayout>
         <CollectionView x:Name="ProductList"
@@ -185,7 +187,7 @@ You can see the generated code under Dependancies -> .net7-XX -> Analysers -> Co
     </StackLayout>
 
 
-7 - Add the ProductDetailsViewModel.cs
+8 - Add the ProductDetailsViewModel.cs
 
     [QueryProperty(nameof(Product), "Product")]
     public partial class ProductDetailViewModel : BaseViewModel
@@ -199,7 +201,7 @@ You can see the generated code under Dependancies -> .net7-XX -> Analysers -> Co
         Product product;
     }
 
-8 - Inject the ProductsViewModel into the constructor of App.xaml.cs
+9 - Inject the ProductsViewModel into the constructor of App.xaml.cs
 
     // Add Hardware Services
     builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
