@@ -6,41 +6,50 @@
              xmlns:model="clr-namespace:MyMauiApp.Models"
              x:DataType="viewmodel:ProductsViewModel"
              Title="MainPage">
-    <StackLayout>
-        <CollectionView x:Name="ProductList"
-                  ItemsSource="{Binding Products}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:Product">
-                    <Grid Padding="10">
-                        <Frame HeightRequest="125">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer 
+    <ScrollView>
+        <VerticalStackLayout>
+
+            <CollectionView x:Name="ProductList"
+                        ItemsSource="{Binding Products}">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Product">
+                        <Grid Padding="10">
+                            <Frame HeightRequest="125">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer 
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ProductsViewModel}}, Path=GoToDetailsCommand}"
                                     CommandParameter="{Binding .}"/>
-                            </Frame.GestureRecognizers>
-                            <Grid Padding="0" ColumnDefinitions="125,*">
-                                <Image Aspect="AspectFill" Source="{Binding Image}"
+                                </Frame.GestureRecognizers>
+                                <Grid Padding="0" ColumnDefinitions="125,*">
+                                    <Image Aspect="AspectFill" Source="{Binding Image}"
                                        WidthRequest="125"
                                        HeightRequest="125"/>
-                                <VerticalStackLayout
+                                    <VerticalStackLayout
                                     VerticalOptions="Center"
                                     Grid.Column="1"
                                     Padding="10">
-                                    <Label Text="{Binding Name}" />
-                                    <Label Text="{Binding Sku}" />
-                                    <Label Text="{Binding FormattedPrice}" />
-                                </VerticalStackLayout>
-                            </Grid>
-                        </Frame>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-        <Button Text="Get Products" 
+                                        <Label Text="{Binding Name}" />
+                                        <Label Text="{Binding Sku}" />
+                                        <Label Text="{Binding FormattedPrice}" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button Text="Get Products" 
                 Command="{Binding GetProductFromContentDeliveryCommand}"
                 IsEnabled="{Binding IsNotBusy}"
                 Margin="8"/>
 
-        <Label IsVisible="{Binding IsBusy}" Text="Loading Data ..." ></Label>
-    </StackLayout>
+            <Button Text="Get Products From Rest" 
+                Command="{Binding GetProductFromRestCommand}"
+                IsEnabled="{Binding IsNotBusy}"
+                Margin="8"/>
+
+            <Label IsVisible="{Binding IsBusy}" Text="Loading Data ..." ></Label>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

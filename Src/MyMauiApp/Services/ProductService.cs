@@ -28,6 +28,7 @@ namespace MyMauiApp.Services
 			productList = await FetchProductsFromContentDeliveryApi();
 			return productList;
 		}
+		
 
 		/// <summary>
 		/// Call the Content Delivery API to load products
@@ -53,6 +54,38 @@ namespace MyMauiApp.Services
 						Image = DemoHelpers.ImagePath(item.properties.photos[0].url)
 					};
 					products.Add(product);
+				}
+			}
+
+			return products;
+		}
+
+
+
+		public async Task<List<Product>> GetProductsFromRest()
+		{
+			// Load Products from from the Content Custom Rest API
+			productList = await FetchProductsFromRestApi();
+			return productList;
+		}
+
+		/// <summary>
+		/// Call the Custom Rest API to load products
+		/// </summary>
+		/// <returns></returns>
+		private async Task<List<Product>> FetchProductsFromRestApi()
+		{
+			var products = new List<Product>();
+			ContentDeliveryResponse contentDeliveryResponse;
+
+			var apiResponse = await httpClient.GetAsync(DemoHelpers.ApiUrl);
+			if (apiResponse.IsSuccessStatusCode)
+			{
+				var restProducts = await apiResponse.Content.ReadFromJsonAsync<List<Product>>();
+				foreach (var item in restProducts)
+				{
+					item.Image = DemoHelpers.ImagePath(item.Image);
+					products.Add(item);
 				}
 			}
 
