@@ -11,7 +11,7 @@ namespace UmbracoCMS.Controllers
         private readonly IUmbracoContextAccessor _umbracoContextAccessor;
         private readonly ILogger<PersonController> _logger;
         private readonly IPublishedValueFallback _publishedValueFallback;
-        private string peopleDoctype = "person";
+        private string personDocType = "person";
 
         public PersonController(IUmbracoContextAccessor umbracoContextAccessor, ILogger<PersonController> logger, IPublishedValueFallback publishedValueFallback)
         {
@@ -36,7 +36,7 @@ namespace UmbracoCMS.Controllers
             }
 
             var rootNode = context.Content.GetAtRoot().FirstOrDefault();
-            var nodes = rootNode.DescendantsOfType(peopleDoctype);
+            var nodes = rootNode.DescendantsOfType(personDocType);
 
 
             var prods = new List<Person>();

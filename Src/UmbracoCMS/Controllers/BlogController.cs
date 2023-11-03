@@ -12,9 +12,10 @@ namespace UmbracoCMS.Controllers
         private readonly ILogger<BlogController> _logger;
         private readonly IPublishedValueFallback _publishedValueFallback;
         private string blogDocType = "blogpost";
+        private string personDocType = "person";
 
 
-        public BlogController(IUmbracoContextAccessor umbracoContextAccessor, ILogger<BlogController> logger, IPublishedValueFallback publishedValueFallback)
+		public BlogController(IUmbracoContextAccessor umbracoContextAccessor, ILogger<BlogController> logger, IPublishedValueFallback publishedValueFallback)
         {
             _umbracoContextAccessor = umbracoContextAccessor;
             _logger = logger;
@@ -38,10 +39,13 @@ namespace UmbracoCMS.Controllers
             }
 
             var rootNode = context.Content.GetAtRoot().FirstOrDefault();
+
             var nodes = rootNode.DescendantsOfType(blogDocType);
-
-
-            var prods = new List<Blog>();
+            // Not actually linked, so we'll pick a random author
+            var authorNodes = rootNode.DescendantsOfType(personDocType).ToList();
+            var authorCount = authorNodes.Count();
+            
+			var prods = new List<Blog>();
 
             foreach (var p in nodes)
             {
@@ -51,6 +55,16 @@ namespace UmbracoCMS.Controllers
                     Id = p.Id,
                     Name = p.Name
                 };
+                
+                // Pick a random author index from the list
+                var randomAuthorIndex = new Random().Next(0, authorCount);
+                var randomAuthor = authorNodes[randomAuthorIndex];
+                var author = new Person()
+                {
+	                Id = randomAuthor.Id,
+	                Name = randomAuthor.Name,
+                };
+                item.Author = author;
 
 
                 var items = p.Value<IEnumerable<string>>(_publishedValueFallback, "categories");
