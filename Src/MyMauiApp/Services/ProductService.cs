@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using MyMauiApp.Helpers;
 using MyMauiApp.Models;
-using MyMauiApp.Services.Models;
 
 namespace MyMauiApp.Services
 {
@@ -98,7 +97,6 @@ namespace MyMauiApp.Services
 		private async Task<List<Product>> FetchProductsFromRestApi()
 		{
 			var products = new List<Product>();
-			ContentDeliveryResponse contentDeliveryResponse;
 
 			var apiResponse = await httpClient.GetAsync(DemoHelpers.ApiUrl);
 			if (apiResponse.IsSuccessStatusCode)
