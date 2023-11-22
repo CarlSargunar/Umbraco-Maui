@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using MyMauiApp.Helpers;
 using MyMauiApp.Models;
-using MyMauiApp.Services.Models;
 
 namespace MyMauiApp.Services
 {
@@ -19,78 +18,64 @@ namespace MyMauiApp.Services
 		{
 			this.httpClient = new HttpClient();
 		}
-
-		List<Product> productList;
+		
 
 		public async Task<List<Product>> GetProducts()
 		{
 			// Load Products from from the Content Delivery API
-			productList = await FetchProductsFromContentDeliveryApi();
+			// var productList = await FetchProductsFromContentDeliveryApi();
+			var productList = await FetchLocalProducts();
 			return productList;
 		}
-		
 
 		/// <summary>
-		/// Call the Content Delivery API to load products
+		/// Load hard coded products
 		/// </summary>
 		/// <returns></returns>
-		private async Task<List<Product>> FetchProductsFromContentDeliveryApi()
+		private async Task<List<Product>> FetchLocalProducts()
 		{
-			var products = new List<Product>();
-			var apiResponse = await httpClient.GetAsync(DemoHelpers.ContentDeliveryApiUrl);
-			if (apiResponse.IsSuccessStatusCode)
+			var productList = new List<Product>();
+			var prod1 = new Product
 			{
-				var contentDeliveryResponse = await apiResponse.Content.ReadFromJsonAsync<ContentDeliveryResponse>();
+				Name = "Product 1",
+				Price = 10.99m,
+				Sku = "SKU1",
+				Image = "https://picsum.photos/id/101/200",
+				Description = "Product 1 Description",
+				Category = new string[] { "Category 1", "Category 2" }
+			};
+			productList.Add(prod1);
 
-				foreach (var item in contentDeliveryResponse.items)
-				{
-					var product = new Product
-					{
-						Name = item.properties.productName,
-						Price = item.properties.price,
-						Sku = item.properties.sku,
-						Description = item.properties.description,
-						Category = item.properties.category,
-						Image = DemoHelpers.ImagePath(item.properties.photos[0].url)
-					};
-					products.Add(product);
-				}
-			}
+			var prod2 = new Product
+			{
+				Name = "Product 2",
+				Price = 20.99m,
+				Sku = "SKU2",
+				Image = "https://picsum.photos/id/102/200",
+				Description = "Product 2 Description",
+				Category = new string[] { "Category 1", "Category 2" }
+			};
+			productList.Add(prod2);
 
-			return products;
+			var prod3 = new Product
+			{
+				Name = "Product 3",
+				Price = 30.99m,
+				Sku = "SKU3",
+				Image = "https://picsum.photos/id/103/200",
+				Description = "Product 3 Description",
+				Category = new string[] { "Category 1", "Category 2" }
+			};
+			productList.Add(prod3);
+
+			return productList;
 		}
-
 
 
 		public async Task<List<Product>> GetProductsFromRest()
-		{
-			// Load Products from from the Content Custom Rest API
-			productList = await FetchProductsFromRestApi();
-			return productList;
-		}
-
-		/// <summary>
-		/// Call the Custom Rest API to load products
-		/// </summary>
-		/// <returns></returns>
-		private async Task<List<Product>> FetchProductsFromRestApi()
-		{
-			var products = new List<Product>();
-			ContentDeliveryResponse contentDeliveryResponse;
-
-			var apiResponse = await httpClient.GetAsync(DemoHelpers.ApiUrl);
-			if (apiResponse.IsSuccessStatusCode)
-			{
-				var restProducts = await apiResponse.Content.ReadFromJsonAsync<List<Product>>();
-				foreach (var item in restProducts)
-				{
-					item.Image = DemoHelpers.ImagePath(item.Image);
-					products.Add(item);
-				}
-			}
-
-			return products;
-		}
+        {
+            throw new NotImplementedException();
+        }
 
 	}
 }

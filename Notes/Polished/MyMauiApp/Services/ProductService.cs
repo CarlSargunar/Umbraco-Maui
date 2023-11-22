@@ -35,7 +35,7 @@ namespace MyMauiApp.Services
 
         /// <summary>
         /// Call the Content Delivery API to load products
-        /// </summary>
+        /// </summary> 
         /// <returns></returns>
         private async Task<List<Product>> FetchProductsFromContentDeliveryApi()
         {
