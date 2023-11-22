@@ -40,7 +40,7 @@ namespace MyMauiApp.ViewModels
 		}
 
 		[RelayCommand]
-		async Task GetProductFromContentDelivery()
+		async Task GetProducts()
 		{
 			if (IsBusy)
 				return;

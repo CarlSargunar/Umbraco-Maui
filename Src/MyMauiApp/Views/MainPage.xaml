@@ -45,7 +45,7 @@
         </CollectionView>
 
         <Button Text="Get Products" 
-            Command="{Binding GetProductFromContentDeliveryCommand}"
+            Command="{Binding GetProductsCommand}"
             IsEnabled="{Binding IsNotBusy}"
             Grid.Row="1"
             Grid.Column="0"

@@ -72,45 +72,10 @@ namespace MyMauiApp.Services
 		}
 
 
-		/// <summary>
-		/// Call the Content Delivery API to load products
-		/// </summary>
-		/// <returns></returns>
-		private async Task<List<Product>> FetchProductsFromContentDeliveryApi()
-		{
-			throw new NotImplementedException();
-		}
-
-
-
 		public async Task<List<Product>> GetProductsFromRest()
-		{
-			// Load Products from from the Content Custom Rest API
-			var productList = await FetchProductsFromRestApi();
-			return productList;
-		}
-
-		/// <summary>
-		/// Call the Custom Rest API to load products
-		/// </summary>
-		/// <returns></returns>
-		private async Task<List<Product>> FetchProductsFromRestApi()
-		{
-			var products = new List<Product>();
-
-			var apiResponse = await httpClient.GetAsync(DemoHelpers.ApiUrl);
-			if (apiResponse.IsSuccessStatusCode)
-			{
-				var restProducts = await apiResponse.Content.ReadFromJsonAsync<List<Product>>();
-				foreach (var item in restProducts)
-				{
-					item.Image = DemoHelpers.ImagePath(item.Image);
-					products.Add(item);
-				}
-			}
-
-			return products;
-		}
+        {
+            throw new NotImplementedException();
+        }
 
 	}
 }
