@@ -26,6 +26,8 @@ Calling
 
 Will return the json from [ProductResponse.json](./ProductResponse.json)
 
+CommunityToolkit.Mvvm
+
 ## Product Service
 
 var products = new List<Product>();
