@@ -19,7 +19,7 @@ Follow these instructions to set up a site
 To install a new Umbraco site, you can use the following commands in your terminal:
 
     # Ensure we have the latest Umbraco templates
-    dotnet new -i Umbraco.Templates::12.2.0
+    dotnet new install Umbraco.Templates::13.0.3 --force
 
     dotnet new umbraco --force -n "UmbracoCMS" --friendly-name "Administrator" --email "admin@example.com" --password "1234567890" --development-database-type SQLite
 
@@ -32,7 +32,7 @@ To install a new Umbraco site, you can use the following commands in your termin
 Once the site is running, you need to stop it and enable the Content Delivery API - more info [here](https://docs.umbraco.com/umbraco-cms/reference/content-delivery-api)
 
 
-The main change is to add the following section to the appsettings.json file:
+The main change is to add the following section to the appsettings.json file Under the Umbraco -> CMS section:
 
     "DeliveryApi": {
             "Enabled": true,
@@ -46,9 +46,9 @@ The API also exposes a Swagger endpoint, which you can use to explore the API an
 
 To load data from the content delivery API, you can use the following queries.
 
-    https://maui.carlcod.es/umbraco/delivery/api/v1/content?filter=contentType%3Aproduct
-    https://maui.carlcod.es/umbraco/delivery/api/v1/content?filter=contentType%3Ablogpost
-    https://maui.carlcod.es/umbraco/delivery/api/v1/content?filter=contentType%3Aperson
+    - Swagger endpoint :  https://localhost:44306/umbraco/swagger/index.html?urls.primaryName=Umbraco%20Delivery%20API
+    - Product Query : https://localhost:44306/umbraco/delivery/api/v2/content?filter=contentType%3Aproduct
+    - Blog Query : https://localhost:44306/umbraco/delivery/api/v2/content?filter=contentType%3Ablogpost
 
 Note - the filter query needs to be encoded, e.g. `contentType:product` becomes `contentType%3Aproduct`
 
