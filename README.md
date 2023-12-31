@@ -93,13 +93,34 @@ The content response data structure is generic, shown below
         }
     }
 
-## Get Products - Rest
 
-For specific content types, you can use the following endpoints. Each endpoint has it's own response structure, which is tailored to the specific content type.
+## Running in Docker
 
-    https://maui.carlcod.es/umbraco/api/product/getallproducts
-    https://maui.carlcod.es/umbraco/api/person/getallpeople
-    https://maui.carlcod.es/umbraco/api/blog/getallblogposts
+The included Dockerfile in the project is configured to run the Umbraco site in a container in isolation with the built in MySQL Database
+
+    # Use the SDK image to build and publish the website
+    FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+    WORKDIR /src
+    COPY ["UmbracoCMS.csproj", "."]
+    RUN dotnet restore "UmbracoCMS.csproj"
+    COPY . .
+    RUN dotnet publish "UmbracoCMS.csproj" -c Release -o /app/publish
+
+    # Copy the published output to the final running image
+    FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final 
+    WORKDIR /app
+    COPY --from=build /app/publish .
+    ENTRYPOINT ["dotnet", "UmbracoCMS.dll"]
+
+To build the image you can use the following from the UmbracoCMS folder
+
+    docker build --tag=umbracocms .
+
+To run the image, you can use the following
+
+    docker run --name umbracocms -p 8000:80 -v umb_media:/app/wwwroot/media -v umb_logs:/app/umbraco/Logs -e ASPNETCORE_ENVIRONMENT='Staging' -d umbracocms
+
+docker run --name umbracocms -p 8000:80 -v umb_media:/app/wwwroot/media -v umb_logs:/app/umbraco/Logs -d umbracocms
 
 
 ## Comparing API options

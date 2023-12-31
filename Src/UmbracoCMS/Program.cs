@@ -1,5 +1,18 @@
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+// Add CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", builder =>
+    {
+        builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
+
 builder.CreateUmbracoBuilder()
     .AddBackOffice()
     .AddWebsite()
@@ -11,6 +24,7 @@ WebApplication app = builder.Build();
 
 await app.BootUmbracoAsync();
 
+app.UseCors("CorsPolicy");
 
 app.UseUmbraco()
     .WithMiddleware(u =>
