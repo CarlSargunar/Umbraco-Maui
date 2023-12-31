@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MyMauiApp.Helpers;
 using MyMauiApp.Models;
+using MyMauiApp.Services.Models;
 
 namespace MyMauiApp.Services
 {
@@ -23,12 +24,38 @@ namespace MyMauiApp.Services
 		public async Task<List<Product>> GetProducts()
 		{
 			// Load Products from from the Content Delivery API
-			// var productList = await FetchProductsFromContentDeliveryApi();
-			var productList = await FetchLocalProducts();
+			var productList = await FetchProductsFromContentDeliveryApi();
+			//var productList = await FetchLocalProducts();
 			return productList;
 		}
 
-		/// <summary>
+        private async Task<List<Product>> FetchProductsFromContentDeliveryApi()
+        {
+            var products = new List<Product>();
+            var apiResponse = await httpClient.GetAsync(DemoHelpers.ContentDeliveryApiUrl);
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                var contentDeliveryResponse = await apiResponse.Content.ReadFromJsonAsync<ContentDeliveryResponse>();
+
+                foreach (var item in contentDeliveryResponse.items)
+                {
+                    var product = new Product
+                    {
+                        Name = item.properties.productName,
+                        Price = item.properties.price,
+                        Sku = item.properties.sku,
+                        Description = item.properties.description,
+                        Category = item.properties.category,
+                        Image = DemoHelpers.ImagePath(item.properties.photos[0].url)
+                    };
+                    products.Add(product);
+                }
+            }
+
+            return products;
+        }
+
+        /// <summary>
 		/// Load hard coded products
 		/// </summary>
 		/// <returns></returns>
