@@ -93,7 +93,7 @@ namespace MyMauiApp.ViewModels
 				}
 
 				IsBusy = true;
-				var newProducts = await _productService.GetProductsFromRest();
+				var newProducts = await _productService.GetProducts();
 
 				if (Products.Count != 0)
 					Products.Clear();
