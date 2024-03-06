@@ -38,6 +38,10 @@
                         <h3 class="post-subtitle">@Podcast.Subtitle</h3>
                     }
                 </a>
+                <audio controls>
+                    <source src="@Podcast.AudioPicker.Url()" type="audio/mpeg">
+                    Unfortunately your browser does not support the audio tag.
+                </audio>
                 <p class="post-meta @(showFullPodcastOnListPage ? "mb-0" : "")">
                     @Umbraco.GetDictionaryValue("Podcast.Posted")
                     @Umbraco.GetDictionaryValue("Podcast.By")@Html.Raw("&nbsp;")@author.Name
