@@ -1,0 +1,75 @@
+﻿@inherits UmbracoViewPage<BlockListItem>
+@using Umbraco.Cms.Core.Models.Blocks
+@using Clean.Core.Extensions
+@using Clean.Core.Helpers
+
+@{
+    var row = Model.Content as LatestPodcastsRow;
+    var settings = Model.Settings as LatestPodcastsRowSettings;
+    if (settings?.Hide ?? false) { return; }
+
+    var spacingClasses = "";
+    if (Model.Settings is ISpacingProperties spacing)
+    {
+        spacingClasses = SpacingHelper.GetSpacingClasses(spacing.PaddingTop, spacing.PaddingBottom, spacing.PaddingLeft, spacing.PaddingRight, spacing.MarginTop, spacing.MarginBottom, spacing.MarginLeft, spacing.MarginRight);
+    }
+
+    var pageSize = row.PageSize;
+    var pageNumber = QueryStringHelper.GetIntFromQueryString(Context.Request.Query, "page", 1);
+    var allPodcasts = row.ArticleList.Children<Podcast>().Where(x => x.IsVisible()).OrderByDescending(x => x.ArticleDate) ?? Enumerable.Empty<Podcast>();
+    var pageOfPodcasts = allPodcasts.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+    var totalItemCount = allPodcasts.Count();
+    var pageCount = totalItemCount > 0 ? Math.Ceiling((double)totalItemCount / pageSize) : 1;
+}
+<div class="row clearfix @(spacingClasses)">
+    <div class="col-md-12 column">
+        @foreach (var Podcast in pageOfPodcasts)
+        {
+            var author = Podcast.Author;
+            bool.TryParse(Podcast.Value<string>("showFullPodcastOnListPage", fallback: Fallback.ToAncestors), out var showFullPodcastOnListPage);
+
+            <div class="post-preview">
+                <a href="@Podcast.Url()">
+                    <h2 class="post-title">
+                        @(!string.IsNullOrWhiteSpace(Podcast.Title) ? Podcast.Title : Podcast.Name)
+                    </h2>
+                    @if (!string.IsNullOrWhiteSpace(Podcast.Subtitle))
+                    {
+                        <h3 class="post-subtitle">@Podcast.Subtitle</h3>
+                    }
+                </a>
+                <p class="post-meta @(showFullPodcastOnListPage ? "mb-0" : "")">
+                    @Umbraco.GetDictionaryValue("Podcast.Posted")
+                    @Umbraco.GetDictionaryValue("Podcast.By")@Html.Raw("&nbsp;")@author.Name
+                    @Umbraco.GetDictionaryValue("Podcast.On") @Podcast.ArticleDate.ToString("MMMM dd, yyyy")
+                </p>
+                @if (showFullPodcastOnListPage && Podcast.Categories != null && Podcast.Categories.Any())
+                {
+                    <span class="mt-2 d-block"></span>
+                    @foreach (var category in Podcast.Categories.Select(x => x.Name).OrderBy(y => y))
+                    {
+                        <span class="badge rounded-pill bg-light text-dark border-dark border-5">@category</span>
+                    }
+
+                }
+            </div>
+
+            @if (showFullPodcastOnListPage)
+            {
+                <div class="row">
+                    <div class="col-12">
+                        @Html.GetBlockListHtml(Podcast.ContentRows)
+                    </div>
+                </div>
+            }
+
+            <hr>
+        }
+
+        @if (row.ShowPagination)
+        {
+            @await Component.InvokeAsync("Pagination", new { totalItems = totalItemCount, url = row.ArticleList.Url(), pageNumber = pageNumber, pageSize = pageSize })
+        }
+    </div>
+</div>
+
