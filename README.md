@@ -1,6 +1,6 @@
 # Umbraco-Maui
 
-This repo is a companion to my talk at the Umbraco UK festival 2023, and shows how to use Umbraco and .NET MAUI together to build a cross-platform app which will load content from the Umbraco content Delivery API.
+This repo is a companion to my talk at the Umbraco Spark 2024, and shows how to use Umbraco and .NET MAUI together to build a cross-platform app which will load content from the Umbraco content Delivery API.
 
 Slides are available : [Slides.pptx](Slides.pptx)
 
@@ -8,32 +8,12 @@ Slides are available : [Slides.pptx](Slides.pptx)
 
 In this session I'll be using the latest Umbraco Content delivery API with a cross platform app built with .NET MAUI to showcase how content delivered headlessly can be consumed by a mobile app on windows, iOs and MacOs as well as Android.
 
-We'll also look at the key differences between REST vs GraphQL, and some of the strengths and weakenesses of both, like Overfetching/Underfetching, Flexibility vs Complexity and performance considerations.
-
-## Setup
-
-Follow these instructions to set up a site
-
 ### Umbraco
 
-To install a new Umbraco site, you can use the following commands in your terminal:
+To run this demo, clone the repo and in a terminal window, run the following from within the src folder
 
-    # Ensure we have the version specific Umbraco templates
-    dotnet new install Umbraco.Templates::13.1.1 --force
-
-    # Create solution/project
-    dotnet new sln --name "MyCMS"
-    dotnet new umbraco --force -n "MyCMS" --friendly-name "Administrator" --email "admin@example.com" --password '1234567890' --development-database-type SQLite
-    dotnet sln add "MyCMS"
-
-    #Add starter kit
-    dotnet add "MyCMS" package clean
-
+    # Ensure your terminal is in the Src folder
     dotnet run --project "MyCMS"
-    #Running
-
-Once the site is running, you need to stop it and enable the Content Delivery API - more info [here](https://docs.umbraco.com/umbraco-cms/reference/content-delivery-api)
-
 
 The main change is to add the following section to the appsettings.json file Under the Umbraco -> CMS section:
 
