@@ -49,9 +49,9 @@ The API also exposes a Swagger endpoint, which you can use to explore the API an
 
 To load data from the content delivery API, you can use the following queries.
 
-    - Swagger endpoint :  https://localhost:44306/umbraco/swagger/index.html?urls.primaryName=Umbraco%20Delivery%20API
-    - Product Query : https://localhost:44306/umbraco/delivery/api/v2/content?filter=contentType%3Aproduct
-    - Blog Query : https://localhost:44306/umbraco/delivery/api/v2/content?filter=contentType%3Ablogpost&take=10
+    - Swagger endpoint : https://localhost:44316/umbraco/swagger/index.html?urls.primaryName=Umbraco%20Delivery%20API
+    - Articles : https://localhost:44316/umbraco/delivery/api/v2/content?filter=contentType%3Aarticle&skip=0&take=10&fields=properties%5B%24all%5D
+    - Podcasts : https://localhost:44316/umbraco/delivery/api/v2/content?filter=contentType%3Apodcast&skip=0&take=10&fields=properties%5B%24all%5D
 
 Note - the filter query needs to be encoded, e.g. `contentType:product` becomes `contentType%3Aproduct`
 
