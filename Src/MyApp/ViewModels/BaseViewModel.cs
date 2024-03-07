@@ -5,17 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyApp.ViewModels
+namespace MyApp.ViewModels;
+
+public partial class BaseViewModel : ObservableObject
 {
-    public partial class BaseViewModel : ObservableObject
-    {
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(IsNotBusy))]
-        bool isBusy;
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsNotBusy))]
+    bool isBusy;
 
-        [ObservableProperty]
-        string title;
+    [ObservableProperty]
+    string title;
 
-        public bool IsNotBusy => !IsBusy;
-    }
+    public bool IsNotBusy => !IsBusy;
 }
