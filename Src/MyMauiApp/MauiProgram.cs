@@ -32,7 +32,7 @@ namespace MyMauiApp
 			builder.Services.AddSingleton<DetailPage>();
 
 			// Add Services
-			builder.Services.AddSingleton<Services.ProductService>();
+			builder.Services.AddSingleton<Services.ContentDeliveryService>();
 
 
 			return builder.Build();

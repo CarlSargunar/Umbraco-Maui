@@ -11,11 +11,11 @@ using MyMauiApp.Services.Models;
 
 namespace MyMauiApp.Services
 {
-	public class ProductService
+	public class ContentDeliveryService
 	{
 
 		HttpClient httpClient;
-		public ProductService()
+		public ContentDeliveryService()
 		{
 			this.httpClient = new HttpClient();
 		}
@@ -32,7 +32,7 @@ namespace MyMauiApp.Services
         private async Task<List<Product>> FetchProductsFromContentDeliveryApi()
         {
             var products = new List<Product>();
-            var apiResponse = await httpClient.GetAsync(DemoHelpers.ContentDeliveryApiUrl);
+            var apiResponse = await httpClient.GetAsync(DemoHelpers.ArticleUrl);
             if (apiResponse.IsSuccessStatusCode)
             {
                 var contentDeliveryResponse = await apiResponse.Content.ReadFromJsonAsync<ContentDeliveryResponse>();
@@ -97,12 +97,6 @@ namespace MyMauiApp.Services
 
 			return productList;
 		}
-
-
-		public async Task<List<Product>> GetProductsFromRest()
-        {
-            throw new NotImplementedException();
-        }
 
 	}
 }

@@ -4,22 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyMauiApp.Helpers
+namespace MyApp.Helpers
 {
-	internal static class DemoHelpers
-	{
-		internal static string BaseUrl = "https://localhost:44316/";
+    internal class DemoHelpers
+    {
+        internal static string BaseUrl = "https://localhost:44316/";
+
         internal static string ArticleUrl = $"{BaseUrl}umbraco/delivery/api/v2/content?filter=contentType%3Aarticle";
         internal static string PodcastUrl = $"{BaseUrl}umbraco/delivery/api/v2/content?filter=contentType%3Apodcast";
 
         internal static string ImagePath(string path)
-		{
-			if (string.IsNullOrEmpty(path))
-				return string.Empty;
+        {
+            if (string.IsNullOrEmpty(path))
+                return string.Empty;
 
-			return $"{BaseUrl}{path}?width=200";
-		}
-
-
-	}
+            return $"{BaseUrl}{path}?width=200";
+        }
+    }
 }

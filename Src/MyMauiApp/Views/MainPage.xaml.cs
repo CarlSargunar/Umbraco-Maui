@@ -22,7 +22,7 @@ public partial class MainPage : ContentPage
 			.Handler
 			.MauiContext
 			.Services
-			.GetService<ProductService>();
+			.GetService<ContentDeliveryService>();
 
 		var products = await productService.GetProducts();
 

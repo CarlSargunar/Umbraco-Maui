@@ -17,10 +17,10 @@ namespace MyMauiApp.ViewModels
 		// An observable collection will notify the UI when items are added or removed
 		public ObservableCollection<Product> Products { get; } = new();
 
-		ProductService _productService;
+		ContentDeliveryService _productService;
 		IConnectivity _connectivity;
 
-		public ProductsViewModel(ProductService productService, IConnectivity connectivity)
+		public ProductsViewModel(ContentDeliveryService productService, IConnectivity connectivity)
 		{
 			Title = "Maui Shop";
 			_productService = productService;
