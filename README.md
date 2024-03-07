@@ -89,6 +89,7 @@ The content response data structure is generic, shown below
 
 - https://devblogs.microsoft.com/dotnet/introducing-net-multi-platform-app-ui/
 - MVVM Community Toolkit - https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/
+- https://www.youtube.com/watch?v=kJ8OHxe1ZNw
 
 ## Push Notifications
 
