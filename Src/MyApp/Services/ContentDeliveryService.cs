@@ -22,7 +22,7 @@ namespace MyApp.Services
             return articleList;
         }
 
-        public async Task<List<Podcast>> PodcastsAsync()
+        public async Task<List<Podcast>> GetPodcasts()
         {
             //var articleList = await FetchProductsFromContentDeliveryApi();
             var podcastList = await FetchLocalPodcasts();
@@ -36,22 +36,22 @@ namespace MyApp.Services
                 new Podcast
                 {
                     Name = "Podcast 1",
-                    Image = "https://via.placeholder.com/150",
+                    MainImage = "https://via.placeholder.com/150",
                     AudioFile = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
                     Author = "Author 1"
                 },
                 new Podcast
                 {
                     Name = "Podcast 2",
-                    Image = "https://via.placeholder.com/150",
-                    AudioFile = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+                    MainImage = "https://via.placeholder.com/150",
+                    AudioFile = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
                     Author = "Author 2"
                 },
                 new Podcast
                 {
                     Name = "Podcast 3",
-                    Image = "https://via.placeholder.com/150",
-                    AudioFile = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+                    MainImage = "https://via.placeholder.com/150",
+                    AudioFile = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
                     Author = "Author 3"
                 }
             };
@@ -66,20 +66,23 @@ namespace MyApp.Services
                 new Article
                 {
                     Name = "Article 1",
-                    Image = "https://via.placeholder.com/150",
-                    Author = "Author 1"
+                    MainImage = "https://via.placeholder.com/150",
+                    Author = "Author 1",
+                    Summary = "Summary 1"
                 },
                 new Article
                 {
                     Name = "Article 2",
-                    Image = "https://via.placeholder.com/150",
-                    Author = "Author 2"
+                    MainImage = "https://via.placeholder.com/150",
+                    Author = "Author 2",
+                    Summary = "Summary 2"
                 },
                 new Article
                 {
                     Name = "Article 3",
-                    Image = "https://via.placeholder.com/150",
-                    Author = "Author 3"
+                    MainImage = "https://via.placeholder.com/150",
+                    Author = "Author 3",
+                    Summary = "Summary 3"
                 }
             };
             return articles;

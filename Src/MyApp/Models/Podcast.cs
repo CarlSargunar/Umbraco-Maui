@@ -13,9 +13,10 @@ namespace MyApp.Models
         // Hard coded for demo
         private static readonly CultureInfo CultureInfo = new("en-GB");
         public string Name { get; set; }
-        public string Image { get; set; }
+        public string MainImage { get; set; }
         public string AudioFile { get; set; }
         public string Author { get; set; }
+        public string Summary { get; set; }
     }
 
     [JsonSerializable(typeof(List<Podcast>))]

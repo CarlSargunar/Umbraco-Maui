@@ -26,11 +26,13 @@
 
             <Button
              x:Name="ArticleBtn"
+             Clicked="ArticleButton_Clicked"
              Text="Articles" 
              HorizontalOptions="Fill" />
-            
+
             <Button
              x:Name="PodcastBtn"
+             Clicked="PodcastButton_Clicked"
              Text="Podcasts" 
              HorizontalOptions="Fill" />
         </VerticalStackLayout>

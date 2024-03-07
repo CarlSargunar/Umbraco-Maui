@@ -6,4 +6,14 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private async void ArticleButton_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new ArticleList());
+    }
+
+    private async void PodcastButton_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new PodcastList());
+    }
 }
