@@ -29,10 +29,10 @@ namespace MyApp
 
             // Add Pages
             builder.Services.AddSingleton<MainPage>();
-            builder.Services.AddSingleton<ArticleList>();
-            builder.Services.AddSingleton<ArticleDetail>();
-            builder.Services.AddSingleton<PodcastList>();
-            builder.Services.AddSingleton<PodcastDetail>();
+            builder.Services.AddSingleton<ArticleListPage>();
+            builder.Services.AddSingleton<ArticleDetailPage>();
+            builder.Services.AddSingleton<PodcastListPage>();
+            builder.Services.AddSingleton<PodcastDetailPage>();
 
             // Add Services
             builder.Services.AddSingleton<Services.ContentDeliveryService>();

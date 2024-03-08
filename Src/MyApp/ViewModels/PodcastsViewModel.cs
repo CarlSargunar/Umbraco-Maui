@@ -32,7 +32,7 @@ namespace MyApp.ViewModels
             if (podcast == null)
                 return;
 
-            await Shell.Current.GoToAsync(nameof(PodcastDetail), true, new Dictionary<string, object>
+            await Shell.Current.GoToAsync(nameof(PodcastDetailPage), true, new Dictionary<string, object>
             {
                 {"Podcast", podcast}
             });

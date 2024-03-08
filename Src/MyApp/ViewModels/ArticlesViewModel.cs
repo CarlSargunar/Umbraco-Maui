@@ -32,7 +32,7 @@ namespace MyApp.ViewModels
             if (article == null)
                 return;
 
-            await Shell.Current.GoToAsync(nameof(ArticleDetail), true, new Dictionary<string, object>
+            await Shell.Current.GoToAsync(nameof(ArticleDetailPage), true, new Dictionary<string, object>
             {
                 {"Article", article}
             });

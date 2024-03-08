@@ -9,11 +9,11 @@ public partial class MainPage : ContentPage
 
     private async void ArticleButton_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new ArticleList());
+        await Navigation.PushAsync(new ArticleListPage(null));
     }
 
     private async void PodcastButton_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new PodcastList());
+        await Navigation.PushAsync(new PodcastListPage(null));
     }
 }
