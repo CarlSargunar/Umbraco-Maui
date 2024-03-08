@@ -1,0 +1,78 @@
+{
+    "name": "Biker Jacket",
+    "createDate": "2023-10-08T23:13:44.0191481",
+    "updateDate": "2023-10-08T23:13:44.6319129",
+    "route": {
+        "path": "/products/biker-jacket/",
+        "startItem": {
+            "id": "ca4249ed-2b23-4337-b522-63cabe5587d1",
+            "path": "home"
+        }
+    },
+    "id": "262beb70-53a6-49b8-9e98-cfde2e85a78e",
+    "contentType": "product",
+    "properties": {
+        "productName": "Biker Jacket",
+        "price": 199,
+        "category": [
+            "bingo",
+            "clothing"
+        ],
+        "description": "Donec rutrum congue leo eget malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.",
+        "sku": "UMB-BIKER-JACKET",
+        "photos": [
+            {
+                "id": "55514845-b8bd-487c-b370-9724852fd6bb",
+                "name": "Biker Jacket",
+                "mediaType": "Image",
+                "url": "/media/inefcvn3/4730684907_8a7f8759cb_b.jpg",
+                "extension": "jpg",
+                "width": 680,
+                "height": 1024,
+                "bytes": 224349,
+                "properties": {},
+                "focalPoint": null,
+                "crops": []
+            }
+        ],
+        "features": {
+            "items": [
+                {
+                    "content": {
+                        "id": "45ac1a1e-27c2-489b-906e-d864c009a083",
+                        "contentType": "feature",
+                        "properties": {
+                            "featureName": "Free shipping",
+                            "featureDetails": "Isn\u0027t that awesome - you only pay for the product"
+                        }
+                    },
+                    "settings": null
+                },
+                {
+                    "content": {
+                        "id": "7b94e979-ecbf-4595-8e27-06895498d584",
+                        "contentType": "feature",
+                        "properties": {
+                            "featureName": "1 Day return policy",
+                            "featureDetails": "You\u0027ll need to make up your mind fast"
+                        }
+                    },
+                    "settings": null
+                },
+                {
+                    "content": {
+                        "id": "d34b2f9d-a2bc-43cc-b752-5c391e5531eb",
+                        "contentType": "feature",
+                        "properties": {
+                            "featureName": "100 Years warranty",
+                            "featureDetails": "But if you\u0027re satisfied it\u0027ll last a lifetime"
+                        }
+                    },
+                    "settings": null
+                }
+            ]
+        },
+        "bodyText": null
+    },
+    "cultures": {}
+}

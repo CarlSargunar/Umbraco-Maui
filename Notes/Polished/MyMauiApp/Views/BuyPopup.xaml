@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+           x:Class="MyMauiApp.Views.BuyPopup"
+           CanBeDismissedByTappingOutsideOfPopup="False">
+    <VerticalStackLayout
+        x:Name="BuyPopupLayout" BackgroundColor="{StaticResource Secondary}">
+        <Label 
+            Text="Added to Basket"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            Padding="50"/>
+        <Button
+            VerticalOptions="End"
+            x:Name="Close_Popup"
+            Text="Continue Shopping"
+            Margin="20"
+            Clicked="OnCloseClicked"></Button>
+    </VerticalStackLayout>
+</mct:Popup>

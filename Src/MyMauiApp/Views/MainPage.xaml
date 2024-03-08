@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:MyMauiApp.ViewModels"
+             x:Class="MyMauiApp.Views.MainPage"
+             xmlns:model="clr-namespace:MyMauiApp.Models"
+             x:DataType="viewmodel:ProductsViewModel"
+             Title="MainPage">
+    <Grid
+    ColumnDefinitions="*,*"
+    ColumnSpacing="5"
+    RowDefinitions="*,Auto"
+    RowSpacing="0">
+        <CollectionView
+            x:Name="ProductList"
+            Grid.ColumnSpan="2"
+        ItemsSource="{Binding Products}"
+        SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Product">
+                    <Grid Padding="10">
+                        <Frame HeightRequest="125">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ProductsViewModel}}, Path=GoToDetailsCommand}"
+                                    CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+                            <Grid Padding="0" ColumnDefinitions="125,*">
+                                <Image Aspect="AspectFill" Source="{Binding Image}"
+                                   WidthRequest="125"
+                                   HeightRequest="125"/>
+                                <VerticalStackLayout
+                                VerticalOptions="Center"
+                                Grid.Column="1"
+                                Padding="10">
+                                    <Label Text="{Binding Name}" />
+                                    <Label Text="{Binding Sku}" />
+                                    <Label Text="{Binding FormattedPrice}" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="Get Products" 
+            Command="{Binding GetProductsCommand}"
+            IsEnabled="{Binding IsNotBusy}"
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="8"/>
+
+        <Button Text="Notifications" 
+            Command="{Binding ToggleNotificationCommand}"
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="8"/>
+
+        <ActivityIndicator IsVisible="{Binding IsBusy}"
+                       IsRunning="{Binding IsBusy}"
+                       HorizontalOptions="Fill"
+                       VerticalOptions="Center"
+                       Color="{StaticResource Primary}"
+                       Grid.RowSpan="2"
+                       Grid.ColumnSpan="2"/>
+    </Grid>
+</ContentPage>
