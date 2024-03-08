@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using MyMauiApp.Views;
+using Plugin.Maui.Audio;
 
 namespace MyMauiApp
 {
@@ -24,16 +25,16 @@ namespace MyMauiApp
 			builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
 
 			// Add ViewModels
-			builder.Services.AddSingleton<ViewModels.ProductDetailViewModel>();
-			builder.Services.AddSingleton<ViewModels.ProductsViewModel>();
+			builder.Services.AddSingleton<ViewModels.PodcastDetailViewModel>();
+			builder.Services.AddSingleton<ViewModels.PodcastsViewModel>();
 
 			// Add Pages
 			builder.Services.AddSingleton<MainPage>();
 			builder.Services.AddSingleton<DetailPage>();
 
 			// Add Services
-			builder.Services.AddSingleton<Services.ContentDeliveryService>();
-
+			builder.Services.AddSingleton<Services.ContentService>();
+			builder.Services.AddSingleton(AudioManager.Current);
 
 			return builder.Build();
 		}

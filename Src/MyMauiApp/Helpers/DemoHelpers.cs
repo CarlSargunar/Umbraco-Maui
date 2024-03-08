@@ -8,11 +8,11 @@ namespace MyMauiApp.Helpers
 {
 	internal static class DemoHelpers
 	{
-		internal static string BaseUrl = "https://localhost:44316/";
-        internal static string ArticleUrl = $"{BaseUrl}umbraco/delivery/api/v2/content?filter=contentType%3Aarticle";
-        internal static string PodcastUrl = $"{BaseUrl}umbraco/delivery/api/v2/content?filter=contentType%3Apodcast";
+        internal static string BaseUrl = "https://localhost:44316/";
 
-        internal static string ImagePath(string path)
+        internal static string ContentDeliveryApiUrl = $"{BaseUrl}umbraco/delivery/api/v2/content?filter=contentType%3Apodcast";
+
+		internal static string ImagePath(string path)
 		{
 			if (string.IsNullOrEmpty(path))
 				return string.Empty;

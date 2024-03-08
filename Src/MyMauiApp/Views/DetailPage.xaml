@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyMauiApp.Views.DetailPage"
              xmlns:viewmodel="clr-namespace:MyMauiApp.ViewModels"
-             x:DataType="viewmodel:ProductDetailViewModel">
+             x:DataType="viewmodel:PodcastDetailViewModel">
     <StackLayout Padding="20">
-        <Image Source="{Binding Product.Image}" WidthRequest="200" HeightRequest="200" />
-        <Label Text="{Binding Product.Name}" />
-        <Label Text="{Binding Product.FormattedPrice}" />
-        <Label Text="{Binding Product.Description}" />
+        <Image Source="{Binding Podcast.MainImage}" WidthRequest="200" HeightRequest="200" />
+        <Label Text="{Binding Podcast.Name}" />
+        <Label Text="{Binding Podcast.Author}" />
+        <Label Text="{Binding Podcast.Summary}" />
+        <Button Text="Play" FontSize="20" HorizontalOptions="Center" Margin="20" Clicked="PlayButton_Clicked"/>
     </StackLayout>
 </ContentPage>

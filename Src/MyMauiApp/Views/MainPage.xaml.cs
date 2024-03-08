@@ -7,10 +7,10 @@ namespace MyMauiApp.Views;
 
 public partial class MainPage : ContentPage
 {
-	public MainPage(ProductsViewModel productsViewModel)
+	public MainPage(PodcastsViewModel viewModel)
 	{
 		// Set the Binding Context on the constructor to hook it all up
-		BindingContext = productsViewModel;
+		BindingContext = viewModel;
 		InitializeComponent();
 	}
 
@@ -18,14 +18,14 @@ public partial class MainPage : ContentPage
 	{
 		base.OnAppearing();
 
-		var productService = Application.Current.MainPage
+		var podcastService = Application.Current.MainPage
 			.Handler
 			.MauiContext
 			.Services
-			.GetService<ContentDeliveryService>();
+			.GetService<ContentService>();
 
-		var products = await productService.GetProducts();
+		var podcasts = await podcastService.GetPodcasts();
 
-		ProductList.ItemsSource = products;
+		PodcastList.ItemsSource = podcasts;
 	}
 }

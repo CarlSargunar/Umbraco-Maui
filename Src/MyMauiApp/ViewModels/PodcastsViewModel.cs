@@ -12,35 +12,35 @@ using MyMauiApp.Views;
 
 namespace MyMauiApp.ViewModels
 {
-	public partial class ProductsViewModel : BaseViewModel
+	public partial class PodcastsViewModel : BaseViewModel
 	{
 		// An observable collection will notify the UI when items are added or removed
-		public ObservableCollection<Product> Products { get; } = new();
+		public ObservableCollection<Podcast> Podcasts { get; } = new();
 
-		ContentDeliveryService _productService;
+		ContentService _PodcastService;
 		IConnectivity _connectivity;
 
-		public ProductsViewModel(ContentDeliveryService productService, IConnectivity connectivity)
+		public PodcastsViewModel(ContentService PodcastService, IConnectivity connectivity)
 		{
 			Title = "Maui Shop";
-			_productService = productService;
+			_PodcastService = PodcastService;
 			_connectivity = connectivity;
 		}
 
 		[RelayCommand]
-		async Task GoToDetails(Product product)
+		async Task GoToDetails(Podcast Podcast)
 		{
-			if (product == null)
+			if (Podcast == null)
 				return;
 
 			await Shell.Current.GoToAsync(nameof(DetailPage), true, new Dictionary<string, object>
 			{
-				{"Product", product }
+				{"Podcast", Podcast }
 			});
 		}
 
 		[RelayCommand]
-		async Task GetProducts()
+		async Task GetPodcasts()
 		{
 			if (IsBusy)
 				return;
@@ -55,18 +55,18 @@ namespace MyMauiApp.ViewModels
 				}
 
 				IsBusy = true;
-				var newProducts = await _productService.GetProducts();
+				var newPodcasts = await _PodcastService.GetPodcasts();
 
-				if (Products.Count != 0)
-					Products.Clear();
+				if (Podcasts.Count != 0)
+					Podcasts.Clear();
 
-				foreach (var product in newProducts)
-					Products.Add(product);
+				foreach (var Podcast in newPodcasts)
+					Podcasts.Add(Podcast);
 
 			}
 			catch (Exception ex)
 			{
-				Debug.WriteLine($"Unable to get products: {ex.Message}");
+				Debug.WriteLine($"Unable to get Podcasts: {ex.Message}");
 				// Hacky way of showing an error - relax, it's a demo
 				await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
 			}
@@ -78,7 +78,7 @@ namespace MyMauiApp.ViewModels
 
 
 		[RelayCommand]
-		async Task GetProductFromRest()
+		async Task GetPodcastFromRest()
 		{
 			if (IsBusy)
 				return;
@@ -93,18 +93,18 @@ namespace MyMauiApp.ViewModels
 				}
 
 				IsBusy = true;
-				var newProducts = await _productService.GetProducts();
+				var newPodcasts = await _PodcastService.GetPodcasts();
 
-				if (Products.Count != 0)
-					Products.Clear();
+				if (Podcasts.Count != 0)
+					Podcasts.Clear();
 
-				foreach (var product in newProducts)
-					Products.Add(product);
+				foreach (var Podcast in newPodcasts)
+					Podcasts.Add(Podcast);
 
 			}
 			catch (Exception ex)
 			{
-				Debug.WriteLine($"Unable to get products: {ex.Message}");
+				Debug.WriteLine($"Unable to get Podcasts: {ex.Message}");
 				// Hacky way of showing an error - relax, it's a demo
 				await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
 			}

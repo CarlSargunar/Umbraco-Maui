@@ -24,6 +24,7 @@ namespace MyApp.ViewModels
             Title = "Podcasts";
             _contentDeliveryService = contentDeliveryService;
             _connectivity = connectivity;
+            loadPodcasts();
         }
 
         [RelayCommand]
@@ -41,6 +42,12 @@ namespace MyApp.ViewModels
         [RelayCommand]
         async Task GetPodcasts()
         {
+            loadPodcasts();
+        }
+
+
+        private async void loadPodcasts()
+        {
             if (IsBusy)
                 return;
 
@@ -48,19 +55,19 @@ namespace MyApp.ViewModels
             {
                 if (_connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
-                    await Shell.Current.DisplayAlert("No connectivity!",
+                    Shell.Current.DisplayAlert("No connectivity!",
                         $"Please check internet and try again.", "OK");
                     return;
                 }
 
                 IsBusy = true;
-                var Podcasts = await _contentDeliveryService.GetPodcasts();
+                var podcasts = await _contentDeliveryService.GetPodcasts();
 
                 if (Podcasts.Count != 0)
                     Podcasts.Clear();
 
-                foreach (var product in Podcasts)
-                    Podcasts.Add(product);
+                foreach (var podcast in podcasts)
+                    Podcasts.Add(podcast);
 
             }
             catch (Exception ex)
@@ -74,6 +81,5 @@ namespace MyApp.ViewModels
                 IsBusy = false;
             }
         }
-
     }
 }

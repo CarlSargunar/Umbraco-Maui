@@ -11,18 +11,18 @@ public partial class PodcastListPage : ContentPage
         InitializeComponent();
     }
 
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
+    //protected override async void OnAppearing()
+    //{
+    //    base.OnAppearing();
 
-        var contentService = Application.Current.MainPage
-            .Handler
-            .MauiContext
-            .Services
-            .GetService<ContentDeliveryService>();
+    //    var contentService = Application.Current.MainPage
+    //        .Handler
+    //        .MauiContext
+    //        .Services
+    //        .GetService<ContentDeliveryService>();
 
-        var podcasts = await contentService.GetPodcasts();
+    //    var podcasts = await contentService.GetPodcasts();
 
-        PodcastList.ItemsSource = podcasts;
-    }
+    //    PodcastList.ItemsSource = podcasts;
+    //}
 }

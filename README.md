@@ -81,15 +81,15 @@ The content response data structure is generic, shown below
 
 ## Umbraco
 
-- Umbraco Content Delivery API - https://our.umbraco.com/documentation/Umbraco-Net/Headless/Content-Delivery-API/
-- GraphQL package for Umbraco - https://marketplace.umbraco.com/package/our.umbraco.graphql
-- GraphQL for Umbraco Heartcore - https://docs.umbraco.com/umbraco-heartcore/tutorials/querying-with-graphql
+- Umbraco Content Delivery API : https://our.umbraco.com/documentation/Umbraco-Net/Headless/Content-Delivery-API/
+- Webhooks : https://docs.umbraco.com/umbraco-cms/reference/webhooks
 
 ## .NET MAUI
 
 - https://devblogs.microsoft.com/dotnet/introducing-net-multi-platform-app-ui/
 - MVVM Community Toolkit - https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/
 - https://www.youtube.com/watch?v=kJ8OHxe1ZNw
+- Workshop : https://www.youtube.com/watch?v=DuNLR_NJv8U
 
 ## Push Notifications
 

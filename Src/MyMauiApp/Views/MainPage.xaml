@@ -4,7 +4,7 @@
              xmlns:viewmodel="clr-namespace:MyMauiApp.ViewModels"
              x:Class="MyMauiApp.Views.MainPage"
              xmlns:model="clr-namespace:MyMauiApp.Models"
-             x:DataType="viewmodel:ProductsViewModel"
+             x:DataType="viewmodel:PodcastsViewModel"
              Title="MainPage">
     <Grid
     ColumnDefinitions="*,*"
@@ -12,21 +12,21 @@
     RowDefinitions="*,Auto"
     RowSpacing="0">
         <CollectionView
-            x:Name="ProductList"
+            x:Name="PodcastList"
             Grid.ColumnSpan="2"
-        ItemsSource="{Binding Products}"
+        ItemsSource="{Binding Podcasts}"
         SelectionMode="None">
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:Product">
+                <DataTemplate x:DataType="model:Podcast">
                     <Grid Padding="10">
                         <Frame HeightRequest="125">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer 
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ProductsViewModel}}, Path=GoToDetailsCommand}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:PodcastsViewModel}}, Path=GoToDetailsCommand}"
                                     CommandParameter="{Binding .}"/>
                             </Frame.GestureRecognizers>
                             <Grid Padding="0" ColumnDefinitions="125,*">
-                                <Image Aspect="AspectFill" Source="{Binding Image}"
+                                <Image Aspect="AspectFill" Source="{Binding MainImage}"
                                    WidthRequest="125"
                                    HeightRequest="125"/>
                                 <VerticalStackLayout
@@ -34,8 +34,8 @@
                                 Grid.Column="1"
                                 Padding="10">
                                     <Label Text="{Binding Name}" />
-                                    <Label Text="{Binding Sku}" />
-                                    <Label Text="{Binding FormattedPrice}" />
+                                    <Label Text="{Binding Author}" />
+                                    <Label Text="{Binding Summary}" />
                                 </VerticalStackLayout>
                             </Grid>
                         </Frame>
@@ -44,18 +44,12 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Button Text="Get Products" 
-            Command="{Binding GetProductsCommand}"
+        <Button Text="Get Podcasts" 
+            Command="{Binding GetPodcastsCommand}"
             IsEnabled="{Binding IsNotBusy}"
             Grid.Row="1"
             Grid.Column="0"
             Margin="8"/>
-
-        <!--<Button Text="Get Products From Rest" 
-            Command="{Binding GetProductFromRestCommand}"
-            Grid.Row="1"
-            Grid.Column="1"
-            Margin="8"/>-->
 
         <ActivityIndicator IsVisible="{Binding IsBusy}"
                        IsRunning="{Binding IsBusy}"

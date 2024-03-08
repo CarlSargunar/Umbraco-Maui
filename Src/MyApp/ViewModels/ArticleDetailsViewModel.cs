@@ -11,11 +11,6 @@ namespace MyApp.ViewModels;
 
 public partial class ArticleDetailsViewModel : BaseViewModel
 {
-    public ArticleDetailsViewModel()
-    {
-
-    }
-
     [ObservableProperty]
     Article article;
 }

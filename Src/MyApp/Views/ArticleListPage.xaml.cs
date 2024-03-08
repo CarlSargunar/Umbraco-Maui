@@ -10,19 +10,20 @@ public partial class ArticleListPage : ContentPage
 		BindingContext = articlesViewModel;
 		InitializeComponent();
 	}
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
 
-        var contentService = Application.Current.MainPage
-            .Handler
-            .MauiContext
-            .Services
-            .GetService<ContentDeliveryService>();
+    //protected override async void OnAppearing()
+    //{
+    //    base.OnAppearing();
 
-        var articles = await contentService.GetArticles();
+    //    var contentService = Application.Current.MainPage
+    //        .Handler
+    //        .MauiContext
+    //        .Services
+    //        .GetService<ContentDeliveryService>();
 
-        ArticleList.ItemsSource = articles;
-    }
+    //    var articles = await contentService.GetArticles();
+
+    //    ArticleList.ItemsSource = articles;
+    //}
 
 }

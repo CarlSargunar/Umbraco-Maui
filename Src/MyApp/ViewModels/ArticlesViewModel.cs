@@ -24,6 +24,7 @@ namespace MyApp.ViewModels
             Title = "Articles";
             _contentDeliveryService = contentDeliveryService;
             _connectivity = connectivity;
+            loadArticles();
         }
 
         [RelayCommand]
@@ -41,6 +42,12 @@ namespace MyApp.ViewModels
         [RelayCommand]
         async Task GetArticles()
         {
+            loadArticles();
+        }
+
+
+        private async void loadArticles()
+        {
             if (IsBusy)
                 return;
 
@@ -48,32 +55,28 @@ namespace MyApp.ViewModels
             {
                 if (_connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
-                    await Shell.Current.DisplayAlert("No connectivity!",
-                        $"Please check internet and try again.", "OK");
+                    Shell.Current.DisplayAlert("No connectivity!",
+                                               $"Please check internet and try again.", "OK");
                     return;
                 }
 
                 IsBusy = true;
                 var articles = await _contentDeliveryService.GetArticles();
-
-                if (Articles.Count != 0)
-                    Articles.Clear();
-
-                foreach (var product in articles)
-                    Articles.Add(product);
-
+                Articles.Clear();
+                foreach (var article in articles)
+                {
+                    Articles.Add(article);
+                }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Unable to get articles: {ex.Message}");
-                // Hacky way of showing an error - relax, it's a demo
-                await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
+                Debug.WriteLine(ex);
+                Shell.Current.DisplayAlert("Error", "Unable to load articles", "OK");
             }
             finally
             {
                 IsBusy = false;
             }
         }
-
     }
 }
