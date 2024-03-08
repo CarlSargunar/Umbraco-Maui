@@ -21,8 +21,8 @@ public partial class PodcastListPage : ContentPage
             .Services
             .GetService<ContentDeliveryService>();
 
-        var articles = await contentService.GetArticles();
+        var podcasts = await contentService.GetPodcasts();
 
-        PodcastList.ItemsSource = articles;
+        PodcastList.ItemsSource = podcasts;
     }
 }

@@ -7,6 +7,7 @@ public partial class ArticleDetailPage : ContentPage
 	public ArticleDetailPage(ArticleDetailsViewModel articleDetailsViewModel)
 	{
 		BindingContext = articleDetailsViewModel;
+		Title = articleDetailsViewModel.Article.Name;
 		InitializeComponent();
 	}
 }

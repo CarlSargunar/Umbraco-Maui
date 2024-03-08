@@ -4,7 +4,8 @@
              xmlns:viewmodel="clr-namespace:MyApp.ViewModels"
              x:Class="MyApp.Views.ArticleListPage"
              xmlns:model="clr-namespace:MyApp.Models"
-             x:DataType="viewmodel:ArticlesViewModel">
+             x:DataType="viewmodel:ArticlesViewModel"
+             Title="Latest Articles">
     <Grid
  ColumnDefinitions="*,*"
  ColumnSpacing="5"
@@ -48,6 +49,7 @@
          IsEnabled="{Binding IsNotBusy}"
          Grid.Row="1"
          Grid.Column="0"
+         Grid.ColumnSpan="2"
          Margin="8"/>
 
         <ActivityIndicator IsVisible="{Binding IsBusy}"

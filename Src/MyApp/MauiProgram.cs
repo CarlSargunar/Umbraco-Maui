@@ -26,6 +26,9 @@ namespace MyApp
             // Add ViewModels
             builder.Services.AddSingleton<ViewModels.ArticleDetailsViewModel>();
             builder.Services.AddSingleton<ViewModels.PodcastDetailsViewModel>();
+            builder.Services.AddSingleton<ViewModels.ArticlesViewModel>();
+            builder.Services.AddSingleton<ViewModels.PodcastsViewModel>();
+
 
             // Add Pages
             builder.Services.AddSingleton<MainPage>();
