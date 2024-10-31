@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using MyBlazorHybridApp.Services;
 
 namespace MyBlazorHybridApp
 {
@@ -23,6 +24,8 @@ namespace MyBlazorHybridApp
 
             // Add Services
             builder.Services.AddSingleton<MyMauiApp.Services.ProductService>();
+            builder.Services.AddScoped<StateService>();
+
 
 
             return builder.Build();

@@ -22,9 +22,11 @@ namespace MyMauiApp.Services
 
 		public async Task<List<Product>> GetProducts()
 		{
+            // Simulate a random delay
+            var delay = new Random().Next(500, 2000);
+            Thread.Sleep(delay);
 			// Load Products from from the Content Delivery API
 			var productList = await FetchProductsFromContentDeliveryApi();
-			//var productList = await FetchLocalProducts();
 			return productList;
 		}
 

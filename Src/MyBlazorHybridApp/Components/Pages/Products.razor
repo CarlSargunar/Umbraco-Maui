@@ -1,10 +1,9 @@
 ﻿@page "/products"
 @using MyMauiApp.Models
 @using MyMauiApp.Services
+@using MyBlazorHybridApp.Services
 
 <h1>Product List</h1>
-
-<p>This component demonstrates showing product data.</p>
 
 @if (products == null)
 {
@@ -12,43 +11,47 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>SKU</th>
-            <th>Description</th>
-            <th>Category</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var product in products)
-        {
-            <tr>
-                <td><img src="@product.Image" alt="@product.Name" width="100" /></td>
-                <td>@product.Name</td>
-                <td>@product.FormattedPrice</td>
-                <td>@product.Sku</td>
-                <td>@product.Description</td>
-                <td>@string.Join(", ", product.Category)</td>
-            </tr>
-        }
-        </tbody>
-    </table>
+    <div class="container">
+        <div class="row">
+            @foreach (var product in products)
+            {
+                <div class="col-12 col-sm-6 col-md-4 mb-4">
+                    <div class="card h-100" @onclick="() => NavigateToProductDetail(product)" style="cursor: pointer;">
+                        <img src="@product.Image" class="card-img-top" alt="@product.Name" />
+                        <div class="card-body">
+                            <h5 class="card-title">@product.Name</h5>
+                            <p class="card-text">
+                                <strong>Price:</strong> @product.FormattedPrice<br />
+                                <strong>SKU:</strong> @product.Sku<br />
+                                <strong>Description:</strong> @product.Description<br />
+                                <strong>Categories:</strong> @string.Join(", ", product.Category)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 }
 
 @code {
     private List<Product>? products;
 
-    // Inject the ProductService instance
     [Inject]
     public ProductService ProductService { get; set; } = default!;
+    [Inject]
+    public StateService StateService { get; set; } = default!;
+    [Inject]
+    public NavigationManager Navigation { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
-    // Call the ProductService to fetch products
         products = await ProductService.GetProducts();
+    }
+
+    private void NavigateToProductDetail(Product product)
+    {
+        StateService.SetSelectedProduct(product);
+        Navigation.NavigateTo($"/product");
     }
 }

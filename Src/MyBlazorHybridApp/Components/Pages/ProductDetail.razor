@@ -1,0 +1,45 @@
+﻿@page "/product"
+@using MyMauiApp.Models
+@using MyBlazorHybridApp.Services
+
+<h1>Product Details</h1>
+
+@if (product == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div>
+        <img src="@product.Image" alt="@product.Name" width="200" />
+        <h2>@product.Name</h2>
+        <p><strong>Price:</strong> @product.FormattedPrice</p>
+        <p><strong>SKU:</strong> @product.Sku</p>
+        <p><strong>Description:</strong> @product.Description</p>
+        <p><strong>Categories:</strong> @string.Join(", ", product.Category)</p>
+
+    </div>
+
+    <button @onclick="GoBack">Back to Products</button>
+
+}
+
+@code {
+    private Product? product;
+
+    [Inject]
+    public StateService ProductState { get; set; } = default!;
+
+    [Inject]
+    public NavigationManager Navigation { get; set; } = default!;
+
+    protected override void OnInitialized()
+    {
+        product = ProductState.SelectedProduct;
+    }
+
+    private void GoBack()
+    {
+        Navigation.NavigateTo("/products");
+    }
+}
