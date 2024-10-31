@@ -1,0 +1,54 @@
+﻿@page "/products"
+@using MyMauiApp.Models
+@using MyMauiApp.Services
+
+<h1>Product List</h1>
+
+<p>This component demonstrates showing product data.</p>
+
+@if (products == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>SKU</th>
+            <th>Description</th>
+            <th>Category</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var product in products)
+        {
+            <tr>
+                <td><img src="@product.Image" alt="@product.Name" width="100" /></td>
+                <td>@product.Name</td>
+                <td>@product.FormattedPrice</td>
+                <td>@product.Sku</td>
+                <td>@product.Description</td>
+                <td>@string.Join(", ", product.Category)</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Product>? products;
+
+    // Inject the ProductService instance
+    [Inject]
+    public ProductService ProductService { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+    // Call the ProductService to fetch products
+        products = await ProductService.GetProducts();
+    }
+}
