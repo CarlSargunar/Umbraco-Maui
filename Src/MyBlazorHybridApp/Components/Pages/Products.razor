@@ -1,0 +1,57 @@
+﻿@page "/products"
+@using MyMauiApp.Models
+@using MyMauiApp.Services
+@using MyBlazorHybridApp.Services
+
+<h1>Product List</h1>
+
+@if (products == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            @foreach (var product in products)
+            {
+                <div class="col-12 col-sm-6 col-md-4 mb-4">
+                    <div class="card h-100" @onclick="() => NavigateToProductDetail(product)" style="cursor: pointer;">
+                        <img src="@product.Image" class="card-img-top" alt="@product.Name" />
+                        <div class="card-body">
+                            <h5 class="card-title">@product.Name</h5>
+                            <p class="card-text">
+                                <strong>Price:</strong> @product.FormattedPrice<br />
+                                <strong>SKU:</strong> @product.Sku<br />
+                                <strong>Description:</strong> @product.Description<br />
+                                <strong>Categories:</strong> @string.Join(", ", product.Category)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+@code {
+    private List<Product>? products;
+
+    [Inject]
+    public ProductService ProductService { get; set; } = default!;
+    [Inject]
+    public StateService StateService { get; set; } = default!;
+    [Inject]
+    public NavigationManager Navigation { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = await ProductService.GetProducts();
+    }
+
+    private void NavigateToProductDetail(Product product)
+    {
+        StateService.SetSelectedProduct(product);
+        Navigation.NavigateTo($"/product");
+    }
+}

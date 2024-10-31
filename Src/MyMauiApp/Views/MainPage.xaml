@@ -51,12 +51,6 @@
             Grid.Column="0"
             Margin="8"/>
 
-        <Button Text="Notifications" 
-            Command="{Binding ToggleNotificationCommand}"
-            Grid.Row="1"
-            Grid.Column="1"
-            Margin="8"/>
-
         <ActivityIndicator IsVisible="{Binding IsBusy}"
                        IsRunning="{Binding IsBusy}"
                        HorizontalOptions="Fill"

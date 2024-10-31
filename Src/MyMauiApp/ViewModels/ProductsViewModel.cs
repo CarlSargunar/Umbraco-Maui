@@ -9,7 +9,6 @@ using CommunityToolkit.Mvvm.Input;
 using MyMauiApp.Models;
 using MyMauiApp.Services;
 using MyMauiApp.Views;
-using Plugin.LocalNotification;
 
 namespace MyMauiApp.ViewModels
 {
@@ -19,17 +18,15 @@ namespace MyMauiApp.ViewModels
 		public ObservableCollection<Product> Products { get; } = new();
 
 		ProductService _productService;
-        NotificationService _notificationService;
         IConnectivity _connectivity;
         private bool isPolling;
         private readonly TimeSpan pollingInterval = TimeSpan.FromSeconds(5);
 
-        public ProductsViewModel(ProductService productService, IConnectivity connectivity, NotificationService notificationService)
+        public ProductsViewModel(ProductService productService, IConnectivity connectivity)
 		{
 			Title = "Maui Shop";
 			_productService = productService;
 			_connectivity = connectivity;
-			_notificationService = notificationService;
 		}
 
 		[RelayCommand]
@@ -80,44 +77,6 @@ namespace MyMauiApp.ViewModels
 				IsBusy = false;
 			}
 		}
-
-
-		[RelayCommand]
-		async Task ToggleNotification()
-		{
-            if (!isPolling)
-            {
-                await StartPollingLoopAsync();
-            }
-            else
-            {
-                await StopPollingLoopAsync();
-            }
-        }
-
-        public async Task StartPollingLoopAsync()
-        {
-            isPolling = true;
-
-            while (isPolling)
-            {
-                var message = await _notificationService.StartPollingAsync();
-
-                if (message != null)
-                {
-                    await Application.Current.MainPage.DisplayAlert("New Article", message.Title, "OK");
-					await GetProducts();
-                }
-
-                // Wait for the polling interval before checking for new notifications again
-                await Task.Delay(pollingInterval);
-            }
-        }
-
-        public async Task StopPollingLoopAsync()
-        {
-            isPolling = false;
-        }
     }
 
 }
