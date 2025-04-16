@@ -1,6 +1,6 @@
 # Umbraco-Maui
 
-This repo is a companion to my talk, first given at the Umbraco UK festival 2023 and at other conferences since. It shows how to use Umbraco and .NET MAUI together to build a cross-platform app which will load content from the Umbraco content Delivery API.
+This repo is a companion to my talk, first given at the Umbraco UK festival and at other conferences since. It shows how to use Umbraco and .NET MAUI together to build a cross-platform app which will load content from the Umbraco content Delivery API.
 
 Slides are available here : [Umbraco & .NET Maui](Umbraco & .NET Maui.pptx)
 
